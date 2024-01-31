@@ -18,18 +18,31 @@
 	--type-noble-gas: rgb(238, 255, 0);
 	--type-unknown: rgb(120, 120, 120);
 
-	--background: rgb(27, 40, 55);
+	--background: rgb(220, 220, 220);
+
+	--scale: 8px
 }
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	background-color: var(--background);
 }
 
 body * {
 	font-family: 'Rubik';
 	z-index: 0;
+}
+
+.title {
+	margin: 0;
+	padding: 0;
+	top: 0;
+	text-align: center;
+	position: relative;
+	font-size: calc(5 * var(--scale));
 }
 
 .table {
@@ -45,13 +58,13 @@ body * {
 .card {
 	text-align: center;
 	aspect-ratio: 1 / 1;
-	width: 90%;
-	font-size: 2.5rem;
+	width: 80%;
+	font-size: calc(4 * var(--scale));
 	font-weight: 1000;
 	-webkit-text-stroke: 0.75px white;
 	margin-top: 0.5rem;
 	box-shadow: 0px 0px 2px 2px black;
-	border-radius: 0.25rem;
+	border-radius: calc(0.25 * var(--scale));
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
@@ -59,7 +72,7 @@ body * {
 
 .element > p {
 	margin-bottom: 0;
-	margin-top: 0.5rem;
+	margin-top: calc(0.5 * var(--scale));
 }
 
 .element-2 {
@@ -76,14 +89,14 @@ body * {
 
 .card {
 	text-align: center;
-	font-size: 0.85rem;
+	font-size: calc(1.5 * var(--scale));
 	-webkit-text-stroke: 0;
 	color: white;
 	cursor: default;
 }
 
 .card>p {
-	margin-top: 1.25rem;
+	margin-top: calc(2 * var(--scale));
 	cursor: default;
 	-webkit-user-select: none;
 	user-select: none;
@@ -102,8 +115,8 @@ body * {
 	box-shadow: 0 0 10px 10px black;
 	align-self: center;
 	position: absolute;
-	height: 15rem;
-	width: 15rem;
+	height: calc(25 * var(--scale));
+	width: calc(25 * var(--scale));
 	z-index: 2;
 }
 
@@ -114,29 +127,29 @@ body * {
 }
 
 .atomic-number {
-	top: 0.25rem;
-	left: 0.5rem;
+	top: calc(0.25 * var(--scale));
+	left: calc(0.5 * var(--scale));
 	width: fit-content;
 	height: fit-content;
-	font-size: 1.75rem;
+	font-size: calc(3 * var(--scale));
 	font-weight: 700;
 	vertical-align: text-top;
 }
 
 .symbol {
 	text-align: center;
-	font-size: 8rem;
+	font-size: calc(12 * var(--scale));
 	font-weight: 1000;
 }
 
 .name {
-	font-size: 1.25rem;
+	font-size: calc(2.5 * var(--scale));
 	font-weight: 650;
 	text-align: center;
 }
 
 .atomic-weight {
-	font-size: 1.25rem;
+	font-size: calc(2.5 * var(--scale));
 	font-weight: 650;
 	text-align: center;
 }
@@ -151,23 +164,25 @@ html:not(:has(.info[hidden])) {
 
 .indicators {
 	position: absolute;
-	top: 2rem;
-	left: 17.5rem;
+	top: clamp(2rem, 7vw, 4rem);
+	left: 18vw;
 	z-index: 1;
 }
 
 .indicators > p {
 	margin: 0;
+	font-size: clamp(calc(0.75 * var(--scale)), 1.25vw, calc(3 * var(--scale)));
 }
 
 .indicators span {
 	-webkit-user-select: none;
 	user-select: none;
 	display: inline-block;
-	margin: 0.5rem;
-	padding: 0.2rem;
-	border-radius: 0.25rem;
-	font-size: 0.75rem;
+	margin: calc(1.25 * var(--scale));
+	padding: calc(0.2 * var(--scale));
+	border-radius: calc(0.5 * var(--scale));
+	font-size:  clamp(calc(0.25 * var(--scale)), 0.75vw, calc(2 * var(--scale)));
+	font-weight: 700;
 	filter: brightness(1.5);
 }
 

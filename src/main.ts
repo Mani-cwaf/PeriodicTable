@@ -9,11 +9,9 @@ const indicators = [...document.querySelectorAll('.indicators span')] as HTMLEle
 let indicatorIndex = 0
 indicators.forEach(element => {
 	if (indicatorIndex < 4) {
-		element.style.color = `var(--state-${element.dataset.name})`;
-		element.style.boxShadow = `0 0 2px 2px var(--state-${element.dataset.name})`;
+		element.style.boxShadow = `0 0 2.5px 5px var(--state-${element.dataset.name})`;
 	} else {
-		element.style.color = `var(--type-${element.dataset.name})`;
-		element.style.boxShadow = `0 0 4px 4px var(--type-${element.dataset.name})`;
+		element.style.boxShadow = `0 0 4px 8px var(--type-${element.dataset.name})`;
 	}
 	indicatorIndex++;
 });
