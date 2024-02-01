@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Rubik:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,500&display=swap');
 
 :root {
-	--state-gas: rgb(255, 10, 10);
-	--state-liquid: rgb(5, 98, 169);
+	--state-gas: rgb(220, 0, 0);
+	--state-liquid: rgb(0, 65, 115);
 	--state-solid: rgb(0, 0, 0);
 	--state-unknown: rgb(120, 120, 120);
 
@@ -18,12 +18,11 @@
 	--type-noble-gas: rgb(238, 255, 0);
 	--type-unknown: rgb(120, 120, 120);
 
-	--background: rgb(220, 220, 220);
-
-	--scale: 8px
+	--background: rgb(255, 255, 255);
 }
 
 body {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -33,7 +32,6 @@ body {
 
 body * {
 	font-family: 'Rubik';
-	z-index: 0;
 }
 
 .title {
@@ -42,7 +40,7 @@ body * {
 	top: 0;
 	text-align: center;
 	position: relative;
-	font-size: calc(5 * var(--scale));
+	font-size: 3.25rem;
 }
 
 .table {
@@ -58,21 +56,20 @@ body * {
 .card {
 	text-align: center;
 	aspect-ratio: 1 / 1;
-	width: 80%;
-	font-size: calc(4 * var(--scale));
+	width: 85%;
+	font-size: 2rem;
 	font-weight: 1000;
 	-webkit-text-stroke: 0.75px white;
 	margin-top: 0.5rem;
-	box-shadow: 0px 0px 2px 2px black;
-	border-radius: calc(0.25 * var(--scale));
+	border-radius: 0.25rem;
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
 }
 
-.element > p {
+.element>p {
 	margin-bottom: 0;
-	margin-top: calc(0.5 * var(--scale));
+	margin-top: 0.25rem;
 }
 
 .element-2 {
@@ -89,14 +86,14 @@ body * {
 
 .card {
 	text-align: center;
-	font-size: calc(1.5 * var(--scale));
+	font-size: 0.75rem;
 	-webkit-text-stroke: 0;
 	color: white;
 	cursor: default;
 }
 
 .card>p {
-	margin-top: calc(2 * var(--scale));
+	margin-top: 1rem;
 	cursor: default;
 	-webkit-user-select: none;
 	user-select: none;
@@ -104,85 +101,130 @@ body * {
 
 .card.lanthanoids {
 	background-color: var(--type-lanthanoid);
+	box-shadow: 0 0 2px 2px var(--type-lanthanoid);
 }
 
 .card.actinoids {
 	background-color: var(--type-actinoid);
+	box-shadow: 0 0 2px 2px var(--type-actinoid);
 }
 
-.info {
-	opacity: 0.95;
-	box-shadow: 0 0 10px 10px black;
-	align-self: center;
+.info-container {
 	position: absolute;
-	height: calc(25 * var(--scale));
-	width: calc(25 * var(--scale));
-	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: fit-content;
+	height: fit-content;
+
+	padding: 1rem;
 }
 
-.info * {
+.info-container:not(.info-container[hidden]) {
+	z-index: 3;
+}
+
+.info-container * {
 	position: relative;
 	margin: 0;
 	padding: 0;
 }
 
+.info-container > p {
+	margin-top: 1rem;
+	font-size: 1rem;
+}
+
+.info {
+	align-self: center;
+	height: 12.5rem;
+	width: 12.5rem;
+}
+
 .atomic-number {
-	top: calc(0.25 * var(--scale));
-	left: calc(0.5 * var(--scale));
+	top: 0.125rem;
+	left: 0.25rem;
 	width: fit-content;
 	height: fit-content;
-	font-size: calc(3 * var(--scale));
+	font-size: 1.5rem;
 	font-weight: 700;
 	vertical-align: text-top;
 }
 
 .symbol {
 	text-align: center;
-	font-size: calc(12 * var(--scale));
+	font-size: 6rem;
 	font-weight: 1000;
 }
 
 .name {
-	font-size: calc(2.5 * var(--scale));
+	font-size: 1.25rem;
 	font-weight: 650;
 	text-align: center;
 }
 
 .atomic-weight {
-	font-size: calc(2.5 * var(--scale));
+	font-size: 1.25rem;
 	font-weight: 650;
 	text-align: center;
 }
 
-html:not(:has(.info[hidden])) *:not(.info) {
+html:not(:has(.info-container[hidden])) *:not(.info) {
 	pointer-events: none;
 }
 
-html:not(:has(.info[hidden])) {
-	z-index: 1;
+html:not(:has(.info-container[hidden])) .indicators-button {
+	opacity: 0.5;
+}
+
+.arrow {
+	display: none;
+	align-self: center;
+	width: 3rem;
+	height: 3rem;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.indicators-button {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	font-size: 1.25rem;
+	width: 12rem;
+	background-color: white;
+	border: none;
+	border-radius: 0.25rem;
+	box-shadow: 0 0 0.5rem 0.5rem black;
+	cursor: pointer;
 }
 
 .indicators {
 	position: absolute;
-	top: clamp(2rem, 7vw, 4rem);
-	left: 18vw;
+	align-self: center;
+	background-color: var(--background);
+	padding: 2rem;
+	border-radius: 1rem;
+	border: 5px solid rgb(15, 15, 15);
+	box-shadow: 0 0 0.5rem 0.5rem black;
 	z-index: 1;
 }
 
-.indicators > p {
+.indicators>p {
 	margin: 0;
-	font-size: clamp(calc(0.75 * var(--scale)), 1.25vw, calc(3 * var(--scale)));
+	font-size: 2rem;
 }
 
 .indicators span {
 	-webkit-user-select: none;
 	user-select: none;
 	display: inline-block;
-	margin: calc(1.25 * var(--scale));
-	padding: calc(0.2 * var(--scale));
-	border-radius: calc(0.5 * var(--scale));
-	font-size:  clamp(calc(0.25 * var(--scale)), 0.75vw, calc(2 * var(--scale)));
-	font-weight: 700;
+	margin: 0.75rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: black;
 	filter: brightness(1.5);
 }
 
