@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Rubik:wght@500;700&display=swap');
 
 :root {
-	--state-gas: rgb(220, 0, 0);
+	--state-gas: rgb(190, 0, 0);
 	--state-liquid: rgb(0, 65, 115);
 	--state-solid: rgb(0, 0, 0);
 	--state-unknown: rgb(120, 120, 120);
@@ -19,6 +19,7 @@
 	--type-unknown: rgb(120, 120, 120);
 
 	--background: rgb(255, 255, 255);
+	--scale: 15px;
 }
 
 body {
@@ -40,12 +41,14 @@ body * {
 	top: 0;
 	text-align: center;
 	position: relative;
-	font-size: 3.25rem;
+	font-size: calc(4 * var(--scale));
+	font-family: 'Inter';
+	font-weight: 900;
 }
 
 .table {
-	width: 85vw;
-	height: 85vh;
+	width: 80vw;
+	height: 80vh;
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: repeat(18, 1fr);
@@ -57,11 +60,11 @@ body * {
 	text-align: center;
 	aspect-ratio: 1 / 1;
 	width: 85%;
-	font-size: 2rem;
-	font-weight: 1000;
+	font-size: calc(2 * var(--scale));
+	font-weight: 700;
 	-webkit-text-stroke: 0.75px white;
-	margin-top: 0.5rem;
-	border-radius: 0.25rem;
+	margin-top: calc(0.5 * var(--scale));
+	border-radius: calc(0.25 * var(--scale));
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
@@ -69,7 +72,7 @@ body * {
 
 .element>p {
 	margin-bottom: 0;
-	margin-top: 0.25rem;
+	margin-top: calc(0.25 * var(--scale));
 }
 
 .element-2 {
@@ -86,14 +89,14 @@ body * {
 
 .card {
 	text-align: center;
-	font-size: 0.75rem;
+	font-size: calc(0.75 * var(--scale));
 	-webkit-text-stroke: 0;
 	color: white;
 	cursor: default;
 }
 
 .card>p {
-	margin-top: 1rem;
+	margin-top: calc(1 * var(--scale));
 	cursor: default;
 	-webkit-user-select: none;
 	user-select: none;
@@ -117,7 +120,7 @@ body * {
 	width: fit-content;
 	height: fit-content;
 
-	padding: 1rem;
+	padding: calc(1 * var(--scale));
 }
 
 .info-container:not(.info-container[hidden]) {
@@ -131,40 +134,40 @@ body * {
 }
 
 .info-container > p {
-	margin-top: 1rem;
-	font-size: 1rem;
+	margin-top: calc(1 * var(--scale));
+	font-size: calc(1 * var(--scale));
 }
 
 .info {
 	align-self: center;
-	height: 12.5rem;
-	width: 12.5rem;
+	height: calc(12.5 * var(--scale));
+	width: calc(12.5 * var(--scale));
 }
 
 .atomic-number {
-	top: 0.125rem;
-	left: 0.25rem;
+	top: calc(0.125 * var(--scale));
+	left: calc(0.25 * var(--scale));
 	width: fit-content;
 	height: fit-content;
-	font-size: 1.5rem;
+	font-size: calc(1.5 * var(--scale));
 	font-weight: 700;
 	vertical-align: text-top;
 }
 
 .symbol {
 	text-align: center;
-	font-size: 6rem;
+	font-size: calc(6 * var(--scale));
 	font-weight: 1000;
 }
 
 .name {
-	font-size: 1.25rem;
+	font-size: calc(1.25 * var(--scale));
 	font-weight: 650;
 	text-align: center;
 }
 
 .atomic-weight {
-	font-size: 1.25rem;
+	font-size: calc(1.25 * var(--scale));
 	font-weight: 650;
 	text-align: center;
 }
@@ -180,22 +183,25 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 .arrow {
 	display: none;
 	align-self: center;
-	width: 3rem;
-	height: 3rem;
+	width: calc(3 * var(--scale));
+	height: calc(3 * var(--scale));
 	cursor: pointer;
 	z-index: 3;
 }
 
 .indicators-button {
 	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	font-size: 1.25rem;
-	width: 12rem;
+	top: calc(1 * var(--scale));
+	left: calc(1 * var(--scale));
+	font-size: calc(1.25 * var(--scale));
+	font-weight: 700;
+	width: calc(12 * var(--scale));
 	background-color: white;
 	border: none;
-	border-radius: 0.25rem;
-	box-shadow: 0 0 0.5rem 0.5rem black;
+	border-radius: calc(0.25 * var(--scale));
+	box-shadow: 0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black;
+	-webkit-user-select: none;
+	user-select: none;
 	cursor: pointer;
 }
 
@@ -203,26 +209,28 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	position: absolute;
 	align-self: center;
 	background-color: var(--background);
-	padding: 2rem;
-	border-radius: 1rem;
+	padding: calc(2 * var(--scale));
+	border-radius: calc(1 * var(--scale));
 	border: 5px solid rgb(15, 15, 15);
-	box-shadow: 0 0 0.5rem 0.5rem black;
+	box-shadow: 0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black;
 	z-index: 1;
 }
 
 .indicators>p {
 	margin: 0;
-	font-size: 2rem;
+	margin-bottom: calc(0.5 * var(--scale));
+	font-size: calc(2 * var(--scale));
+	font-weight: 700;
 }
 
 .indicators span {
 	-webkit-user-select: none;
 	user-select: none;
 	display: inline-block;
-	margin: 0.75rem;
-	padding: 0.25rem;
-	border-radius: 0.25rem;
-	font-size: 1.25rem;
+	margin: calc(1 * var(--scale));
+	padding: calc(0.25 * var(--scale));
+	border-radius: calc(0.25 * var(--scale));
+	font-size: calc(1.25 * var(--scale));
 	font-weight: 600;
 	color: black;
 	filter: brightness(1.5);
@@ -231,4 +239,10 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 .indicators div {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-height: 640px) {
+    :root {
+        --scale: 10px
+    }
 }

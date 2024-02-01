@@ -12,9 +12,9 @@ const indicators = [...document.querySelectorAll('.indicators span')] as HTMLEle
 let indicatorIndex = 0
 indicators.forEach(element => {
 	if (indicatorIndex < 4) {
-		element.style.boxShadow = `0 0 0.3rem 0.6rem var(--state-${element.dataset.name})`;
+		element.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.75 * var(--scale)) var(--state-${element.dataset.name})`;
 	} else {
-		element.style.boxShadow = `0 0 0.3rem 0.6rem var(--type-${element.dataset.name})`;
+		element.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.75 * var(--scale)) var(--type-${element.dataset.name})`;
 	}
 	indicatorIndex++;
 });
@@ -27,10 +27,10 @@ const showInfo = (elementIndex: any) => {
 	let element = elements[elementIndex - 1];
 	infoContainer.removeAttribute('hidden');
 	infoContainer.style.backgroundColor = `var(--type-${element.dataset.type})`;
-	infoContainer.style.boxShadow = `0 0 0.5rem 0.5rem black`;
+	infoContainer.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
 
 	info.style.backgroundColor = `var(--type-${element.dataset.type})`;
-	info.style.boxShadow = `0 0 0.5rem 0.5rem black`;
+	info.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
 
 
 	infoChildren[0].innerHTML = elementIndex;
@@ -147,31 +147,44 @@ elements.forEach(element => {
 			clickedIndexType = '';
 			elements[clickedIndex - 1].style.transform = 'scale(1)';
 			elements[clickedIndex - 1].style.filter = 'brightness(1)';
-			element.style.transform = 'scale(1.25)';
-			element.style.filter = 'brightness(1.2)';
 			showInfo(clickedIndex);
 			clickedIndex = currentIndex;
+
 		} else {
+			//If the category of element being selected is not already selected by another element, change the category highlighted
+
+			//Highlight all elements
 			elements.forEach(e => {
 				e.style.opacity = '1';
 				e.style.transform = 'scale(1)';
+				element.style.filter = 'brightness(1)';
 			})
-			element.style.transform = 'scale(1.25)';
-			element.style.filter = 'brightness(1.2)';
+			//If an element is not of the same category as the one selected, unhighlight it
+			let currentType = element.dataset.type;
+			elements.forEach(e => {
+				if (e.dataset.type != currentType) {
+					e.style.opacity = '0.5';
+				}
+			})
+
+			if (clickedIndex != 0) {
+				elements[clickedIndex - 1].style.transform = 'scale(1)';
+				elements[clickedIndex - 1].style.filter = 'brightness(1)';
+			}
 		}
+
+		element.style.transform = 'scale(1.25)';
+		element.style.filter = 'brightness(1.2)';
 
 		clickedIndexType = currentIndexType;
 		clickedIndex = currentIndex;
-		let currentType = element.dataset.type;
-		elements.forEach(e => {
-			if (e.dataset.type != currentType) {
-				e.style.opacity = '0.5';
-			}
-		})
+
+		// unhighlights lanthanoid and actinoid cards
 		cards.forEach(e => {
 			e.style.opacity = '0.5';
 		})
-		element.style.transform = 'scale(1.25)';
+
+		//Opens info panel
 		showInfo(clickedIndex);
 	});
 
@@ -214,7 +227,7 @@ for (let i = 57; i < 72; i++) {
 	const lanthanoid = elements[i - 1];
 	lanthanoid.style.gridRow = '8'
 	lanthanoid.style.gridColumn = `${(i - 56) + 2}`
-	lanthanoid.style.marginTop = '2rem'
+	lanthanoid.style.marginTop = 'calc(2 * var(--scale))'
 }
 
 //Actinoids
