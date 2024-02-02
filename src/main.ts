@@ -22,7 +22,13 @@ container.addEventListener("DOMMouseScroll", (e) => {
 	e.stopPropagation();
 }, false);
 
-document.body.onmousedown = function(e) { if (e.button === 1) return false; }
+container.onmousedown = (e) => {
+	if (e.button === 1) {
+		e.preventDefault();
+		e.stopPropagation();
+		return false;
+	}
+}
 
 // Scroll down to indicators when indicator button is clicked
 indicatorsButton.addEventListener('click', () => {
@@ -49,6 +55,7 @@ const extraInfo = [...infoContainer.querySelectorAll('.info-container > p')] as 
 
 const showInfo = (elementIndex: any) => {
 	let element = elements[elementIndex];
+	html.scroll(0, 0);
 	infoContainer.removeAttribute('hidden');
 	infoContainer.style.backgroundColor = `var(--type-${element.dataset.type})`;
 	infoContainer.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
@@ -57,7 +64,7 @@ const showInfo = (elementIndex: any) => {
 	info.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
 
 
-	infoChildren[0].innerHTML = elementIndex;
+	infoChildren[0].innerHTML = elementIndex + 1;
 	infoChildren[1].innerHTML = element.innerHTML;
 	infoChildren[2].innerHTML = element.dataset.name as string;
 	infoChildren[3].innerHTML = element.dataset.weight as string;
@@ -93,19 +100,19 @@ const resetEls = (array: HTMLElement[]) => {
 }
 
 const highlightCategory = (currentType: string) => {
-			//Highlight all elements
-			resetEls(elements);
-			//If an element is not of the same category as the one selected, unhighlight it
-			elements.forEach(e => {
-				if (e.dataset.type != currentType) {
-					e.style.opacity = '0.5';
-				}
-			})
-			cards.forEach(e => {
-				if (e.dataset.type != currentType) {
-					e.style.opacity = '0.5';
-				}
-			})
+	//Highlight all elements
+	resetEls(elements);
+	//If an element is not of the same category as the one selected, unhighlight it
+	elements.forEach(e => {
+		if (e.dataset.type != currentType) {
+			e.style.opacity = '0.5';
+		}
+	})
+	cards.forEach(e => {
+		if (e.dataset.type != currentType) {
+			e.style.opacity = '0.5';
+		}
+	})
 }
 
 let i = 0
