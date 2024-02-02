@@ -22,6 +22,10 @@
 	--scale: 15px;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	position: relative;
 	display: flex;
@@ -29,10 +33,24 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: var(--background);
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 body * {
 	font-family: 'Rubik';
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+.main-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .title {
@@ -48,7 +66,7 @@ body * {
 
 .table {
 	width: 80vw;
-	height: 80vh;
+	height: 85vh;
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: repeat(18, 1fr);
@@ -68,6 +86,7 @@ body * {
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
+	z-index: 1;
 }
 
 .element>p {
@@ -127,13 +146,17 @@ body * {
 	z-index: 3;
 }
 
+.info-container:not(.info-container[hidden]) .info {
+	z-index: 3;
+}
+
 .info-container * {
 	position: relative;
 	margin: 0;
 	padding: 0;
 }
 
-.info-container > p {
+.info-container>p {
 	margin-top: calc(1 * var(--scale));
 	font-size: calc(1 * var(--scale));
 }
@@ -142,6 +165,7 @@ body * {
 	align-self: center;
 	height: calc(12.5 * var(--scale));
 	width: calc(12.5 * var(--scale));
+	z-index: 0;
 }
 
 .atomic-number {
@@ -195,6 +219,7 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	left: calc(1 * var(--scale));
 	font-size: calc(1.25 * var(--scale));
 	font-weight: 700;
+	text-align: center;
 	width: calc(12 * var(--scale));
 	background-color: white;
 	border: none;
@@ -206,13 +231,15 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 }
 
 .indicators {
-	position: absolute;
+	position: relative;
 	align-self: center;
 	background-color: var(--background);
 	padding: calc(2 * var(--scale));
 	border-radius: calc(1 * var(--scale));
 	border: 5px solid rgb(15, 15, 15);
 	box-shadow: 0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black;
+	margin-top: 5rem;
+	margin-bottom: 2rem;
 	z-index: 1;
 }
 
@@ -236,13 +263,17 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	filter: brightness(1.5);
 }
 
+.indicators span.type-indicator {
+	cursor: pointer;
+}
+
 .indicators div {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 }
 
 @media (max-height: 640px) {
-    :root {
-        --scale: 10px
-    }
+	:root {
+		--scale: 10px
+	}
 }
