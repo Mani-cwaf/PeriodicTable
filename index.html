@@ -1,614 +1,662 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel='icon' href='/favicon.ico' type='image/x-icon' />
-		<script type="module" src="/src/main.ts"></script>
-		<title>Periodic Table</title>
-	</head>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel='icon' href='/favicon.ico' type='image/x-icon' />
+	<script type="module" src="/src/main.ts" defer></script>
+	<title>Periodic Table</title>
+</head>
 
-	<body>
-		<div class="full-container">
-			<h1 class="title">PERIODIC TABLE</h1>
+<body>
+	<button class="back">Back</button>
+	<div class="simulation"></div>
 
-			<div class="indicators-button">Show Indicators</div>
-
-			<div class="main-content">
-				<div class="info-container" hidden>
-					<div class="info">
-						<p class="atomic-number"></p>
-						<p class="symbol"></p>
-						<p class="name"></p>
-						<p class="atomic-weight"></p>
-					</div>
-					<p class="state"></p>
-					<p class="type"></p>
+	<div class="full-container">
+		<div class="main-content">
+			<div class="info-container" hidden>
+				<div class="info">
+					<p class="atomic-number"></p>
+					<p class="symbol"></p>
+					<p class="name"></p>
+					<p class="atomic-weight"></p>
 				</div>
-
-				<div class="table">
-					<div class="element" data-state="gas" data-type="diatomic-non-metal"
-						data-weight="1.008"
-						data-name="Hydrogen">
-						<p>H</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="4.002602" data-name="Helium">
-						<p>He</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="6.94" data-name="Lithium">
-						<p>Li</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="9.0121831"
-						data-name="Beryllium">
-						<p>Be</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="10.81" data-name="Boron">
-						<p>B</p>
-					</div>
-					<div class="element" data-state="solid" data-type="polyatomic-non-metal"
-						data-weight="12.011"
-						data-name="Carbon">
-						<p>C</p>
-					</div>
-					<div class="element" data-state="gas" data-type="diatomic-non-metal"
-						data-weight="14.007"
-						data-name="Nitrogen">
-						<p>N</p>
-					</div>
-					<div class="element" data-state="gas" data-type="diatomic-non-metal"
-						data-weight="15.999"
-						data-name="Oxygen">
-						<p>O</p>
-					</div>
-					<div class="element" data-state="gas" data-type="diatomic-non-metal"
-						data-weight="18.998403163"
-						data-name="Flourine">
-						<p>F</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="20.1797" data-name="Neon">
-						<p>Ne</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="22.98976928"
-						data-name="Sodium">
-						<p>Na</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="24.305"
-						data-name="Magnesium">
-						<p>Mg</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="26.9815385"
-						data-name="Aluminium">
-						<p>Al</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="28.085" data-name="Silicon">
-						<p>Si</p>
-					</div>
-					<div class="element" data-state="solid" data-type="polyatomic-non-metal"
-						data-weight="30.973761998"
-						data-name="Phosphorus">
-						<p>P</p>
-					</div>
-					<div class="element" data-state="solid" data-type="polyatomic-non-metal"
-						data-weight="32.06"
-						data-name="Sulphor">
-						<p>S</p>
-					</div>
-					<div class="element" data-state="gas" data-type="diatomic-non-metal"
-						data-weight="35.45"
-						data-name="Chlorine">
-						<p>Cl</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="39.948" data-name="Argon">
-						<p>Ar</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="39.0983"
-						data-name="Potassium">
-						<p>K</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="40.078"
-						data-name="Calcium">
-						<p>Ca</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="44.955908"
-						data-name="Scandium">
-						<p>Sc</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="47.867"
-						data-name="Titanium">
-						<p>Ti</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="50.9415"
-						data-name="Vanadium">
-						<p>V</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="51.9961"
-						data-name="Chromium">
-						<p>Cr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="54.938044"
-						data-name="Manganese">
-						<p>Mn</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="55.845" data-name="Iron">
-						<p>Fe</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="58.933194"
-						data-name="Cobalt">
-						<p>Co</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="58.6934"
-						data-name="Nickel">
-						<p>Ni</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="63.546"
-						data-name="Copper">
-						<p>Cu</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="65.38" data-name="Zinc">
-						<p>Zn</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="69.723"
-						data-name="Gallium">
-						<p>Ga</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="72.630" data-name="Germanium">
-						<p>Ge</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="74.921595" data-name="Arsenic">
-						<p>As</p>
-					</div>
-					<div class="element" data-state="solid" data-type="polyatomic-non-metal"
-						data-weight="78.971"
-						data-name="Selenium">
-						<p>Se</p>
-					</div>
-					<div class="element" data-state="liquid" data-type="diatomic-non-metal"
-						data-weight="79.904"
-						data-name="Bromine">
-						<p>Br</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="83.798" data-name="Krypton">
-						<p>Kr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="85.4678"
-						data-name="Rubidium">
-						<p>Rb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="87.62"
-						data-name="Strontium">
-						<p>Sr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="88.90584"
-						data-name="Yttrium">
-						<p>Y</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="91.224"
-						data-name="Zirconium">
-						<p>Zr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="92.90637"
-						data-name="Niobium">
-						<p>Nb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="95.95"
-						data-name="Molybdenum">
-						<p>Mo</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="98"
-						data-name="Technetium">
-						<p>Tc</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="101.07"
-						data-name="Ruthenium">
-						<p>Ru</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="102.9055"
-						data-name="Rhodium">
-						<p>Rh</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="106.42"
-						data-name="Palladium">
-						<p>Pd</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="107.8682"
-						data-name="Silver">
-						<p>Ag</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="112.414"
-						data-name="Cadmium">
-						<p>Cd</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="114.818"
-						data-name="indium">
-						<p>In</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="118.710"
-						data-name="Tin">
-						<p>Sn</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="121.760" data-name="Antimony">
-						<p>Sb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="127.60" data-name="Tellurium">
-						<p>Te</p>
-					</div>
-					<div class="element" data-state="solid" data-type="diatomic-non-metal"
-						data-weight="126.90447"
-						data-name="Iodine">
-						<p>I</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="131.293" data-name="Xenon">
-						<p>Xe</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="132.90545196"
-						data-name="Caesium">
-						<p>Cs</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="137.327"
-						data-name="Barium">
-						<p>Ba</p>
-					</div>
-					<div class="card lanthanoids">
-						<p>57-71</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="138.90547"
-						data-name="Lanthanum">
-						<p>La</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="140.116" data-name="Cerium">
-						<p>Ce</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="140.90766"
-						data-name="Praseodymium">
-						<p>Pr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="144.242" data-name="Neodymium">
-						<p>Nd</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="145" data-name="Promethium">
-						<p>Pm</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="150.36" data-name="Samarium">
-						<p>Sm</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="151.964" data-name="Europium">
-						<p>Eu</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="157.25" data-name="Gadolinium">
-						<p>Gd</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="158.92535" data-name="Terbium">
-						<p>Tb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="162.5" data-name="Dysprosium">
-						<p>Dy</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="164.93033" data-name="Holmium">
-						<p>Ho</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="167.259" data-name="Erbium">
-						<p>Er</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="168.93422" data-name="Thulium">
-						<p>Tm</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="173.045" data-name="Ytterbium">
-						<p>Yb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="lanthanoid"
-						data-weight="174.9668" data-name="Lutetium">
-						<p>Lu</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="178.49"
-						data-name="Halfnium">
-						<p>Hf</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="180.94788"
-						data-name="Tantalum">
-						<p>Ta</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="183.84"
-						data-name="Tungsten">
-						<p>W</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="186.207"
-						data-name="Rhenium">
-						<p>Re</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="190.23"
-						data-name="Osmium">
-						<p>Os</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="192.217"
-						data-name="Iridium">
-						<p>Ir</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="195.084"
-						data-name="Platium">
-						<p>Pt</p>
-					</div>
-					<div class="element" data-state="solid" data-type="transition-metal"
-						data-weight="196.966569"
-						data-name="Gold">
-						<p>Au</p>
-					</div>
-					<div class="element" data-state="liquid" data-type="transition-metal"
-						data-weight="200.592"
-						data-name="Mercury">
-						<p>Hg</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="204.38"
-						data-name="Thallium">
-						<p>Tl</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="207.2"
-						data-name="Lead">
-						<p>Pb</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="208.9804"
-						data-name="Bismuth">
-						<p>Bi</p>
-					</div>
-					<div class="element" data-state="solid" data-type="post-transition-metal"
-						data-weight="209"
-						data-name="Polonium">
-						<p>Po</p>
-					</div>
-					<div class="element" data-state="solid" data-type="metalloid"
-						data-weight="210" data-name="Astatine">
-						<p>At</p>
-					</div>
-					<div class="element" data-state="gas" data-type="noble-gas"
-						data-weight="222"
-						data-name="Radon">
-						<p>Rn</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-metal"
-						data-weight="223" data-name="Francium">
-						<p>Fr</p>
-					</div>
-					<div class="element" data-state="solid" data-type="alkaline-earth-metal"
-						data-weight="226"
-						data-name="Radium">
-						<p>Ra</p>
-					</div>
-					<div class="card actinoids">
-						<p>89-103</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="227" data-name="Actinium">
-						<p>Ac</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="232.0377" data-name="Thorium">
-						<p>Th</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="231.03588"
-						data-name="Protactinium">
-						<p>Pa</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="238.02891" data-name="Uranium">
-						<p>U</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="237" data-name="Neptunium">
-						<p>Np</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="244" data-name="Plutonium">
-						<p>Pu</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="243" data-name="Americium">
-						<p>Am</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="247" data-name="Curium">
-						<p>Cm</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="247" data-name="Berkelium">
-						<p>Bk</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="251" data-name="Californium">
-						<p>Cf</p>
-					</div>
-					<div class="element" data-state="solid" data-type="actinoid"
-						data-weight="252" data-name="Einsteinium">
-						<p>Es</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="actinoid"
-						data-weight="257" data-name="Fermium">
-						<p>Fm</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="actinoid"
-						data-weight="258" data-name="Mandelevium">
-						<p>Md</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="actinoid"
-						data-weight="259" data-name="Nobelium">
-						<p>No</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="actinoid"
-						data-weight="266" data-name="Lawrencium">
-						<p>Lr</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="267"
-						data-name="Rutherfordium">
-						<p>Rf</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="268"
-						data-name="Dubnium">
-						<p>Db</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="269"
-						data-name="Seaborgium">
-						<p>Sg</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="270"
-						data-name="Bohrium">
-						<p>Bh</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="269"
-						data-name="Hassium">
-						<p>Hs</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="278" data-name="Meitnerium">
-						<p>Mt</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="281" data-name="Darmstadtium">
-						<p>Ds</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="282" data-name="Roentgenium">
-						<p>Rg</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="transition-metal"
-						data-weight="285"
-						data-name="Copernicium">
-						<p>Cn</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="286" data-name="Nihonium">
-						<p>Nh</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="post-transition-metal"
-						data-weight="289" data-name="Flerovium">
-						<p>Fl</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="289" data-name="Moscovium">
-						<p>Mc</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="293" data-name="Livermorium">
-						<p>Lv</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="294" data-name="Tennessine">
-						<p>Ts</p>
-					</div>
-					<div class="element" data-state="unknown" data-type="unknown"
-						data-weight="294" data-name="Oganesson">
-						<p>Og</p>
-					</div>
-				</div>
+				<p class="state"></p>
+				<p class="type"></p>
+				<button class="render">Render</button>
 			</div>
 
-			<div class="indicators">
-				<p>State of matter (color of name):</p>
-
-				<div>
-					<span class="state-indicator" data-name="solid">Solid</span>
-					<span class="state-indicator" data-name="liquid">Liquid</span>
-					<span class="state-indicator" data-name="gas">Gas</span>
-					<span class="state-indicator" data-name="unknown"> Unknown</span>
+			<div class="table">
+				<div class="element" data-state="gas" data-type="non-metal" data-weight="1.008" data-name="Hydrogen"
+					data-structure="1,0,1,0,0,0">
+					<p>1</p>
+					<p>H</p>
 				</div>
-
-				<p>Subcategory (color of background):</p>
-
-				<div>
-					<span class="type-indicator" data-name="alkaline-metal">Alkaline
-						Metal</span>
-					<span class="type-indicator" data-name="alkaline-earth-metal">Alkaline
-						Earth Metal</span>
-					<span class="type-indicator" data-name="metalloid">Metalloid</span>
-					<span class="type-indicator" data-name="noble-gas">Noble Gas</span>
-					<span class="type-indicator" data-name="lanthanoid">Lanthanoid</span>
-					<span class="type-indicator" data-name="actinoid">Actinoid</span>
-					<span class="type-indicator" data-name="polyatomic-non-metal">Polyatomic
-						Non-Metal</span>
-					<span class="type-indicator" data-name="unknown">Unknown</span>
-					<span class="type-indicator" data-name="transition-metal">Transition
-						Metal</span>
-					<span class="type-indicator"
-						data-name="post-transition-metal">Post-Transition Metal</span>
-					<span class="type-indicator" data-name="diatomic-non-metal">Diatomic
-						Non-Metal</span>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="4.002602" data-name="Helium"
+					data-structure="2,2,2,0,0,0">
+					<p>2</p>
+					<p>He</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="6.94"
+					data-name="Lithium" data-structure="3,4,2,1,0,0">
+					<p>3</p>
+					<p>Li</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="9.0121831"
+					data-name="Beryllium" data-structure="4,5,2,2,0,0">
+					<p>4</p>
+					<p>Be</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="10.81" data-name="Boron"
+					data-structure="5,6,2,3,0,0">
+					<p>5</p>
+					<p>B</p>
+				</div>
+				<div class="element" data-state="solid" data-type="non-metal" data-weight="12.011" data-name="Carbon"
+					data-structure="6,6,2,4,0,0">
+					<p>6</p>
+					<p>C</p>
+				</div>
+				<div class="element" data-state="gas" data-type="non-metal" data-weight="14.007" data-name="Nitrogen"
+					data-structure="7,7,2,5,0,0">
+					<p>7</p>
+					<p>N</p>
+				</div>
+				<div class="element" data-state="gas" data-type="non-metal" data-weight="15.999" data-name="Oxygen"
+					data-structure="8,8,2,6,0,0">
+					<p>8</p>
+					<p>O</p>
+				</div>
+				<div class="element" data-state="gas" data-type="halogen" data-weight="18.998403163"
+					data-name="Flourine" data-structure="9,10,2,7,0,0">
+					<p>9</p>
+					<p>F</p>
+				</div>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="20.1797" data-name="Neon"
+					data-structure="10,10,2,8,0,0">
+					<p>10</p>
+					<p>Ne</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="22.98976928"
+					data-name="Sodium" data-structure="11,12,2,8,1,0">
+					<p>11</p>
+					<p>Na</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="24.305"
+					data-name="Magnesium" data-structure="12,12,2,8,2,0">
+					<p>12</p>
+					<p>Mg</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="26.9815385"
+					data-name="Aluminium" data-structure="13,14,2,8,3,0">
+					<p>13</p>
+					<p>Al</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="28.085" data-name="Silicon"
+					data-structure="14,14,2,8,4,0">
+					<p>14</p>
+					<p>Si</p>
+				</div>
+				<div class="element" data-state="solid" data-type="non-metal" data-weight="30.973761998"
+					data-name="Phosphorus" data-structure="15,16,2,8,5,0">
+					<p>15</p>
+					<p>P</p>
+				</div>
+				<div class="element" data-state="solid" data-type="non-metal" data-weight="32.06" data-name="Sulphor"
+					data-structure="16,16,2,8,6,0">
+					<p>16</p>
+					<p>S</p>
+				</div>
+				<div class="element" data-state="gas" data-type="halogen" data-weight="35.45" data-name="Chlorine"
+					data-structure="17,18,2,8,7,0">
+					<p>17</p>
+					<p>Cl</p>
+				</div>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="39.948" data-name="Argon"
+					data-structure="18,22,2,8,8,0">
+					<p>18</p>
+					<p>Ar</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="39.0983"
+					data-name="Potassium" data-structure="19,20,2,8,8,1">
+					<p>19</p>
+					<p>K</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="40.078"
+					data-name="Calcium" data-structure="20,20,2,8,8,2">
+					<p>20</p>
+					<p>Ca</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="44.955908"
+					data-name="Scandium" data-structure="21,24,2,8,9,3">
+					<p>21</p>
+					<p>Sc</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="47.867"
+					data-name="Titanium" data-structure="22,26,2,8,10,2">
+					<p>22</p>
+					<p>Ti</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="50.9415"
+					data-name="Vanadium" data-structure="23,28,2,8,11,2">
+					<p>23</p>
+					<p>V</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="51.9961"
+					data-name="Chromium" data-structure="24,28,2,8,13,1">
+					<p>24</p>
+					<p>Cr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="54.938044"
+					data-name="Manganese" data-structure="25,30,2,8,13,2">
+					<p>25</p>
+					<p>Mn</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="55.845"
+					data-name="Iron" data-structure="26,30,2,8,14,2">
+					<p>26</p>
+					<p>Fe</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="58.933194"
+					data-name="Cobalt" data-structure="27,32,2,8,15,2">
+					<p>27</p>
+					<p>Co</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="58.6934"
+					data-name="Nickel" data-structure="28,31,2,8,16,2">
+					<p>28</p>
+					<p>Ni</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="63.546"
+					data-name="Copper" data-structure="29,35,2,8,18,1">
+					<p>29</p>
+					<p>Cu</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="65.38"
+					data-name="Zinc" data-structure="30,35,2,8,18,2">
+					<p>30</p>
+					<p>Zn</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="69.723"
+					data-name="Gallium" data-structure="31,39,2,8,18,3">
+					<p>31</p>
+					<p>Ga</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="72.630" data-name="Germanium"
+					data-structure="32,41,2,8,18,4">
+					<p>32</p>
+					<p>Ge</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="74.921595"
+					data-name="Arsenic" data-structure="33,42,2,8,18,5">
+					<p>33</p>
+					<p>As</p>
+				</div>
+				<div class="element" data-state="solid" data-type="non-metal" data-weight="78.971" data-name="Selenium"
+					data-structure="34,45,2,8,18,6">
+					<p>34</p>
+					<p>Se</p>
+				</div>
+				<div class="element" data-state="liquid" data-type="halogen" data-weight="79.904" data-name="Bromine"
+					data-structure="35,45,2,8,18,7">
+					<p>35</p>
+					<p>Br</p>
+				</div>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="83.798" data-name="Krypton"
+					data-structure="36,48,2,8,18,8">
+					<p>36</p>
+					<p>Kr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="85.4678"
+					data-name="Rubidium" data-structure="37,48,2,8,18,8,1">
+					<p>37</p>
+					<p>Rb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="87.62"
+					data-name="Strontium" data-structure="38,50,2,8,18,8,2">
+					<p>38</p>
+					<p>Sr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="88.90584"
+					data-name="Yttrium" data-structure="39,50,2,8,18,9,2">
+					<p>39</p>
+					<p>Y</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="91.224"
+					data-name="Zirconium" data-structure="40,51,2,8,18,10,2">
+					<p>40</p>
+					<p>Zr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="92.90637"
+					data-name="Niobium" data-structure="41,52,2,8,18,12,1">
+					<p>41</p>
+					<p>Nb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="95.95"
+					data-name="Molybdenum" data-structure="42,54,2,8,18,13,1">
+					<p>42</p>
+					<p>Mo</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="98"
+					data-name="Technetium" data-structure="43,55,2,8,18,14,1">
+					<p>43</p>
+					<p>Tc</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="101.07"
+					data-name="Ruthenium" data-structure="44,57,2,8,18,15,1">
+					<p>44</p>
+					<p>Ru</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="102.9055"
+					data-name="Rhodium" data-structure="45,58,2,8,18,16,1">
+					<p>45</p>
+					<p>Rh</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="106.42"
+					data-name="Palladium" data-structure="46,60,2,8,18,18">
+					<p>46</p>
+					<p>Pd</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="107.8682"
+					data-name="Silver" data-structure="47,61,2,8,18,18,1">
+					<p>47</p>
+					<p>Ag</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="112.414"
+					data-name="Cadmium" data-structure="48,64,2,8,18,18,2">
+					<p>48</p>
+					<p>Cd</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="114.818"
+					data-name="indium" data-structure="49,66,2,8,18,18,3">
+					<p>49</p>
+					<p>In</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="118.710"
+					data-name="Tin" data-structure="50,69,2,8,18,18,4">
+					<p>50</p>
+					<p>Sn</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="121.760" data-name="Antimony"
+					data-structure="51,71,2,8,18,18,5">
+					<p>51</p>
+					<p>Sb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="127.60" data-name="Tellurium"
+					data-structure="52,76,2,8,18,18,6">
+					<p>52</p>
+					<p>Te</p>
+				</div>
+				<div class="element" data-state="solid" data-type="halogen" data-weight="126.90447" data-name="Iodine"
+					data-structure="53,74,2,8,18,18,7">
+					<p>53</p>
+					<p>I</p>
+				</div>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="131.293" data-name="Xenon"
+					data-structure="54,77,2,8,18,18,8">
+					<p>54</p>
+					<p>Xe</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="132.90545196"
+					data-name="Caesium" data-structure="55,78,2,8,18,18,8,1">
+					<p>55</p>
+					<p>Cs</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="137.327"
+					data-name="Barium" data-structure="56,81,2,8,18,18,8,2">
+					<p>56</p>
+					<p>Ba</p>
+				</div>
+				<div class="card lanthanoids">
+					<p>57-71</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="138.90547"
+					data-name="Lanthanum" data-structure="57,82,2,8,18,18,9,2">
+					<p>57</p>
+					<p>La</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="140.116" data-name="Cerium"
+					data-structure="58,82,2,8,18,19,9,2">
+					<p>58</p>
+					<p>Ce</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="140.90766"
+					data-name="Praseodymium" data-structure="59,82,2,8,18,21,8,2">
+					<p>59</p>
+					<p>Pr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="144.242"
+					data-name="Neodymium" data-structure="60,84,2,8,18,22,8,2">
+					<p>60</p>
+					<p>Nd</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="145" data-name="Promethium"
+					data-structure="61,84,2,8,18,23,8,2">
+					<p>61</p>
+					<p>Pm</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="150.36" data-name="Samarium"
+					data-structure="62,88,2,8,18,24,8,2">
+					<p>62</p>
+					<p>Sm</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="151.964"
+					data-name="Europium" data-structure="63,89,2,8,18,25,8,2">
+					<p>63</p>
+					<p>Eu</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="157.25"
+					data-name="Gadolinium" data-structure="64,93,2,8,18,25,9,2">
+					<p>64</p>
+					<p>Gd</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="158.92535"
+					data-name="Terbium" data-structure="65,94,2,8,18,27,8,2">
+					<p>65</p>
+					<p>Tb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="162.5"
+					data-name="Dysprosium" data-structure="66,97,2,8,18,28,8,2">
+					<p>66</p>
+					<p>Dy</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="164.93033"
+					data-name="Holmium" data-structure="67,98,2,8,18,29,8,2">
+					<p>67</p>
+					<p>Ho</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="167.259" data-name="Erbium"
+					data-structure="68,99,2,8,18,30,8,2">
+					<p>68</p>
+					<p>Er</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="168.93422"
+					data-name="Thulium" data-structure="69,100,2,8,18,31,8,2">
+					<p>69</p>
+					<p>Tm</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="173.045"
+					data-name="Ytterbium" data-structure="70,103,2,8,18,32,8,2">
+					<p>70</p>
+					<p>Yb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="174.9668"
+					data-name="Lutetium" data-structure="71,104,2,8,18,32,9,2">
+					<p>71</p>
+					<p>Lu</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="178.49"
+					data-name="Halfnium" data-structure="72,106,2,8,18,32,10,2">
+					<p>72</p>
+					<p>Hf</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="180.94788"
+					data-name="Tantalum" data-structure="73,108,2,8,18,32,11,2">
+					<p>73</p>
+					<p>Ta</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="183.84"
+					data-name="Tungsten" data-structure="74,110,2,8,18,32,12,2">
+					<p>74</p>
+					<p>W</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="186.207"
+					data-name="Rhenium" data-structure="75,111,2,8,18,32,13,2">
+					<p>75</p>
+					<p>Re</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="190.23"
+					data-name="Osmium" data-structure="76,114,2,8,18,32,14,2">
+					<p>76</p>
+					<p>Os</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="192.217"
+					data-name="Iridium" data-structure="77,115,2,8,18,32,15,2">
+					<p>77</p>
+					<p>Ir</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="195.084"
+					data-name="Platinum" data-structure="78,117,2,8,18,32,17,1">
+					<p>78</p>
+					<p>Pt</p>
+				</div>
+				<div class="element" data-state="solid" data-type="transition-metal" data-weight="196.966569"
+					data-name="Gold" data-structure="79,118,2,8,18,32,18,1">
+					<p>79</p>
+					<p>Au</p>
+				</div>
+				<div class="element" data-state="liquid" data-type="transition-metal" data-weight="200.592"
+					data-name="Mercury" data-structure="80,121,2,8,18,32,18,2">
+					<p>80</p>
+					<p>Hg</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="204.38"
+					data-name="Thallium" data-structure="81,123,2,8,18,32,18,3">
+					<p>81</p>
+					<p>Tl</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="207.2"
+					data-name="Lead" data-structure="82,125,2,8,18,32,18,4">
+					<p>82</p>
+					<p>Pb</p>
+				</div>
+				<div class="element" data-state="solid" data-type="post-transition-metal" data-weight="208.9804"
+					data-name="Bismuth" data-structure="83,126,2,8,18,32,18,5">
+					<p>83</p>
+					<p>Bi</p>
+				</div>
+				<div class="element" data-state="solid" data-type="metalloid" data-weight="209" data-name="Polonium"
+					data-structure="84,125,2,8,18,32,18,6">
+					<p>84</p>
+					<p>Po</p>
+				</div>
+				<div class="element" data-state="solid" data-type="halogen" data-weight="210" data-name="Astatine"
+					data-structure="85,125,2,8,18,32,18,7">
+					<p>85</p>
+					<p>At</p>
+				</div>
+				<div class="element" data-state="gas" data-type="noble-gas" data-weight="222" data-name="Radon"
+					data-structure="86,136,2,8,18,32,18,8">
+					<p>86</p>
+					<p>Rn</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-metal" data-weight="223"
+					data-name="Francium" data-structure="87,136,2,8,18,32,18,8,1">
+					<p>87</p>
+					<p>Fr</p>
+				</div>
+				<div class="element" data-state="solid" data-type="alkaline-earth-metal" data-weight="226"
+					data-name="Radium" data-structure="88,138,2,8,18,32,18,8,2">
+					<p>88</p>
+					<p>Ra</p>
+				</div>
+				<div class="card actinoids">
+					<p>89-103</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="227" data-name="Actinium"
+					data-structure="89,138,2,8,18,32,18,9,2">
+					<p>89</p>
+					<p>Ac</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="232.0377" data-name="Thorium"
+					data-structure="90,142,2,8,18,32,18,10,2">
+					<p>90</p>
+					<p>Th</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="231.03588"
+					data-name="Protactinium" data-structure="91,148,2,8,18,32,20,9,2">
+					<p>91</p>
+					<p>Pa</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="238.02891" data-name="Uranium"
+					data-structure="92,146,2,8,18,32,21,9,2">
+					<p>92</p>
+					<p>U</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="237" data-name="Neptunium"
+					data-structure="93,144,2,8,18,32,22,9,2">
+					<p>93</p>
+					<p>Np</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="244" data-name="Plutonium"
+					data-structure="94,150,2,8,18,32,24,8,2">
+					<p>94</p>
+					<p>Pu</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="243" data-name="Americium"
+					data-structure="95,148,2,8,18,32,25,8,2">
+					<p>95</p>
+					<p>Am</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="247" data-name="Curium"
+					data-structure="96,151,2,8,18,32,25,9,2">
+					<p>96</p>
+					<p>Cm</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="247" data-name="Berkelium"
+					data-structure="97,150,2,8,18,32,27,8,2">
+					<p>97</p>
+					<p>Bk</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="251" data-name="Californium"
+					data-structure="98,153,2,8,18,32,28,8,2">
+					<p>98</p>
+					<p>Cf</p>
+				</div>
+				<div class="element" data-state="solid" data-type="actinoid" data-weight="252" data-name="Einsteinium"
+					data-structure="99,153,2,8,18,32,29,8,2">
+					<p>99</p>
+					<p>Es</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="actinoid" data-weight="257" data-name="Fermium"
+					data-structure="100,157,2,8,18,32,30,8,2">
+					<p>100</p>
+					<p>Fm</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="actinoid" data-weight="258" data-name="Mandelevium"
+					data-structure="101,157,2,8,18,32,31,8,2">
+					<p>101</p>
+					<p>Md</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="actinoid" data-weight="259" data-name="Nobelium"
+					data-structure="102,157,2,8,18,32,32,8,2">
+					<p>102</p>
+					<p>No</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="actinoid" data-weight="266" data-name="Lawrencium"
+					data-structure="103,159,2,8,18,32,32,9,2">
+					<p>103</p>
+					<p>Lr</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="267"
+					data-name="Rutherfordium" data-structure="104,157,2,8,18,32,32,10,2">
+					<p>104</p>
+					<p>Rf</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="268"
+					data-name="Dubnium" data-structure="105,157,2,8,18,32,32,11,2">
+					<p>105</p>
+					<p>Db</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="269"
+					data-name="Seaborgium" data-structure="106,157,2,8,18,32,32,12,2">
+					<p>106</p>
+					<p>Sg</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="270"
+					data-name="Bohrium" data-structure="107,155,2,8,18,32,32,13,2">
+					<p>107</p>
+					<p>Bh</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="269"
+					data-name="Hassium" data-structure="108,157,2,8,18,32,32,14,2">
+					<p>108</p>
+					<p>Hs</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="278"
+					data-name="Meitnerium" data-structure="109,157,2,8,18,32,32,15,2">
+					<p>109</p>
+					<p>Mt</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="281"
+					data-name="Darmstadtium" data-structure="110,151,2,8,18,32,32,16,2">
+					<p>110</p>
+					<p>Ds</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="282"
+					data-name="Roentgenium" data-structure="111,161,2,8,18,32,32,17,2">
+					<p>111</p>
+					<p>Rg</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="transition-metal" data-weight="285"
+					data-name="Copernicium" data-structure="112,173,2,8,18,32,32,18,2">
+					<p>112</p>
+					<p>Cn</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="post-transition-metal" data-weight="286"
+					data-name="Nihonium" data-structure="113,173,2,8,18,32,32,18,3">
+					<p>113</p>
+					<p>Nh</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="post-transition-metal" data-weight="289"
+					data-name="Flerovium" data-structure="114,175,2,8,18,32,32,18,4">
+					<p>114</p>
+					<p>Fl</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="post-transition-metal" data-weight="289"
+					data-name="Moscovium" data-structure="115,174,2,8,18,32,32,18,5">
+					<p>115</p>
+					<p>Mc</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="post-transition-metal" data-weight="293"
+					data-name="Livermorium" data-structure="116,177,2,8,18,32,32,18,6">
+					<p>116</p>
+					<p>Lv</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="halogen" data-weight="294" data-name="Tennessine"
+					data-structure="117,177,2,8,18,32,32,18,7">
+					<p>117</p>
+					<p>Ts</p>
+				</div>
+				<div class="element" data-state="unknown" data-type="noble-gas" data-weight="294" data-name="Oganesson"
+					data-structure="118,176,2,8,18,32,32,18,8">
+					<p>118</p>
+					<p>Og</p>
 				</div>
 			</div>
 		</div>
 
-	</body>
+		<div class="indicators">
+			<p>State of matter (color of name):</p>
+
+			<div>
+				<span class="state-indicator" data-name="solid">Solid</span>
+				<span class="state-indicator" data-name="liquid">Liquid</span>
+				<span class="state-indicator" data-name="gas">Gas</span>
+				<span class="state-indicator" data-name="unknown"> Unknown</span>
+			</div>
+
+			<p>Subcategory (color of background):</p>
+
+			<div>
+				<span class="type-indicator" data-name="alkaline-metal">Alkaline
+					Metal</span>
+				<span class="type-indicator" data-name="alkaline-earth-metal">Alkaline
+					Earth Metal</span>
+				<span class="type-indicator" data-name="metalloid">Metalloid</span>
+				<span class="type-indicator" data-name="noble-gas">Noble Gas</span>
+				<span class="type-indicator" data-name="lanthanoid">Lanthanoid</span>
+				<span class="type-indicator" data-name="actinoid">Actinoid</span>
+				<span class="type-indicator" data-name="non-metal">Non-Metal</span>
+				<span class="type-indicator" data-name="unknown">Unknown</span>
+				<span class="type-indicator" data-name="transition-metal">Transition
+					Metal</span>
+				<span class="type-indicator" data-name="post-transition-metal">Post-Transition Metal</span>
+				<span class="type-indicator" data-name="halogen">Halogen</span>
+			</div>
+		</div>
+	</div>
+</body>
 
 </html>

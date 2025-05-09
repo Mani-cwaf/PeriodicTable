@@ -9,7 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/noisejs": "^2.1.0",
+    "@types/three": "^0.176.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "noisejs": "^2.1.0",
+    "three": "^0.176.0"
   }
 }

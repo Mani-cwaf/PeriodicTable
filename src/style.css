@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Rubik:wght@500;800&display=swap');
 
 :root {
-	--state-gas: rgb(190, 0, 0);
+	--state-gas: rgb(101, 0, 0);
 	--state-liquid: rgb(0, 65, 115);
 	--state-solid: rgb(0, 0, 0);
 	--state-unknown: rgb(120, 120, 120);
 
-	--type-alkaline-metal: rgb(255, 52, 52);
-	--type-lanthanoid: rgb(0, 157, 92);
-	--type-transition-metal: rgb(21, 166, 203);
-	--type-alkaline-earth-metal: rgb(255, 149, 0);
-	--type-actinoid: rgb(21, 204, 11);
-	--type-post-transition-metal: rgb(255, 66, 107);
-	--type-metalloid: rgb(154, 62, 212);
-	--type-polyatomic-non-metal: rgb(3, 160, 0);
-	--type-diatomic-non-metal: rgb(152, 232, 15);
-	--type-noble-gas: rgb(238, 255, 0);
+	--type-alkaline-metal: rgb(60, 0, 0);
+	--type-lanthanoid: rgb(0, 74, 74);
+	--type-transition-metal: rgb(0, 36, 71);
+	--type-alkaline-earth-metal: rgb(15, 15, 60);
+	--type-actinoid: rgb(21, 82, 62);
+	--type-post-transition-metal: rgb(0, 69, 0);
+	--type-metalloid: rgb(39, 53, 0);
+	--type-non-metal: rgb(142, 170, 2);
+	--type-halogen: rgb(122, 170, 2);
+	--type-noble-gas: rgb(170, 159, 2);
 	--type-unknown: rgb(120, 120, 120);
 
-	--background: rgb(255, 255, 255);
+	--background: rgb(5, 5, 5);
 	--scale: 15px;
 }
 
@@ -30,6 +30,8 @@ body {
 	background-color: var(--background);
 	overflow-x: hidden;
 	overflow-y: auto;
+	color: white;
+	z-index: 2;
 }
 
 body * {
@@ -41,8 +43,7 @@ body::-webkit-scrollbar {
 }
 
 .full-container {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -52,29 +53,19 @@ body::-webkit-scrollbar {
 .main-content {
 	position: relative;
 	display: flex;
+	width: 100%;
+	height: 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-.title {
-	margin: 0;
-	padding: 0;
-	top: 0;
-	text-align: center;
-	position: relative;
-	font-size: calc(4 * var(--scale));
-	font-family: 'Inter';
-	font-weight: 900;
+	margin-top: 1rem;
 }
 
 .table {
-	width: 80vw;
+	width: 85vw;
 	height: 85vh;
 	display: grid;
 	grid-auto-flow: row;
-	grid-template-columns: repeat(18, 1fr);
-	grid-template-rows: repeat(9, 1fr);
 }
 
 .element,
@@ -84,18 +75,27 @@ body::-webkit-scrollbar {
 	width: 85%;
 	font-size: calc(2 * var(--scale));
 	font-weight: 700;
-	-webkit-text-stroke: 1px white;
+	color: rgb(225, 225, 225);
 	margin-top: calc(0.5 * var(--scale));
 	border-radius: calc(0.25 * var(--scale));
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
 	z-index: 1;
+	transition: all 0.15s ease-in-out;
 }
 
-.element>p {
+.element>p:nth-child(1) {
+	position: absolute;
+	margin-left: 0.25rem;
+	font-size: 0.75rem;
 	margin-bottom: 0;
 	margin-top: calc(0.25 * var(--scale));
+}
+
+.element>p:nth-child(2) {
+	margin-bottom: 0;
+	margin-top: calc(1 * var(--scale));
 }
 
 .element-2 {
@@ -140,13 +140,13 @@ body::-webkit-scrollbar {
 	display: flex;
 	flex-direction: column;
 	align-self: center;
-	width: fit-content;
+	width: 12rem;
 	height: fit-content;
-
 	padding: calc(1 * var(--scale));
 }
 
 .info-container:not(.info-container[hidden]) {
+	pointer-events: all;
 	z-index: 3;
 }
 
@@ -202,12 +202,32 @@ body::-webkit-scrollbar {
 	text-align: center;
 }
 
-html:not(:has(.info-container[hidden])) *:not(.info) {
+html:not(:has(.info-container[hidden])) *:not(.info-container) {
 	pointer-events: none;
 }
 
 html:not(:has(.info-container[hidden])) .indicators-button {
 	opacity: 0.5;
+}
+
+.back {
+	position: absolute;
+	margin: 2rem;
+}
+
+.back,
+.render {
+	display: none;
+
+	margin: 0.5rem;
+	margin-top: 1rem;
+	padding: 0.25rem;
+	color: rgb(225, 225, 225);
+	background-color: rgba(0, 0, 0, 0.2);
+	font-size: 2rem;
+	border-radius: 0.5rem;
+	pointer-events: all !important;
+	z-index: 4;
 }
 
 .indicators-button {
@@ -255,9 +275,9 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	margin: calc(1 * var(--scale));
 	padding: calc(0.25 * var(--scale));
 	border-radius: calc(0.25 * var(--scale));
-	font-size: calc(1.25 * var(--scale));
+	font-size: 2vw;
 	font-weight: 800;
-	color: black;
+	color: rgb(225, 225, 225);
 }
 
 .indicators span.type-indicator {
@@ -267,6 +287,11 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 .indicators div {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+}
+
+.simulation {
+	pointer-events: none;
+	z-index: -1;
 }
 
 @media (max-height: 640px) {
