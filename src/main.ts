@@ -14,9 +14,11 @@ const simulation = document.querySelector('.simulation') as HTMLElement
 indicators.forEach((indicator) => {
 	// add box shadow to indicators, based on state for the first 4, and category for the rest 
 	if (indicator.classList.contains('state-indicator')) {
-		indicator.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.75 * var(--scale)) var(--state-${indicator.dataset.name})`;
+		indicator.style.backgroundColor = `rgba(var(--state-${indicator.dataset.name}), 0.25)`
+		indicator.style.boxShadow = `0 0 calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--state-${indicator.dataset.name}))`;
 	} else {
-		indicator.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.75 * var(--scale)) var(--type-${indicator.dataset.name})`;
+		indicator.style.backgroundColor = `rgba(var(--type-${indicator.dataset.name}), 0.25)`
+		indicator.style.boxShadow = `0 0 calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--type-${indicator.dataset.name}))`;
 		indicator.addEventListener('click', () => {
 			html.scroll(0, 0);
 			setTimeout(() => {
@@ -30,17 +32,14 @@ const infoChildren = [...info.querySelectorAll('*')] as HTMLElement[];
 const extraInfo = [...infoContainer.querySelectorAll('.info-container > *:not(:nth-child(1))')] as HTMLElement[];
 
 const showInfo = (elementIndex: any) => {
-	console.log('show')
-
 	let element = elements[elementIndex];
 	html.scroll(0, 0);
 	infoContainer.removeAttribute('hidden');
-	infoContainer.style.backgroundColor = `var(--type-${element.dataset.type})`;
+	infoContainer.style.backgroundColor = `rgb(var(--type-${element.dataset.type}))`;
 	infoContainer.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
 
-	info.style.backgroundColor = `var(--type-${element.dataset.type})`;
+	info.style.backgroundColor = `rgb(var(--type-${element.dataset.type}))`;
 	info.style.boxShadow = `0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black`;
-
 
 	infoChildren[0].innerHTML = elementIndex + 1;
 	infoChildren[1].innerHTML = element.children[1].innerHTML;
@@ -54,8 +53,9 @@ const showInfo = (elementIndex: any) => {
 }
 
 const hideInfo = () => {
-	console.log("hide")
-
+	if (infoContainer.hasAttribute('rendering')) {
+		return;
+	}
 	infoContainer.setAttribute('hidden', '');
 
 	infoContainer.style.backgroundColor = ``;
@@ -87,32 +87,39 @@ const highlightCategory = (currentType: string) => {
 	//If an element is not of the same category as the one selected, unhighlight it
 	elements.forEach(e => {
 		if (e.dataset.type != currentType) {
-			e.style.opacity = '0.5';
+			e.style.opacity = '0.4';
 		}
 	})
 	cards.forEach(e => {
 		if (e.dataset.type != currentType) {
-			e.style.opacity = '0.5';
+			e.style.opacity = '0.4';
 		}
 	})
 }
 
 infoContainer.addEventListener('click', (e) => { e.stopPropagation() })
 
-html.addEventListener('click', () => {
+const clearAll = () => {
 	if (!infoContainer.hasAttribute('hidden')) {
 		hideInfo();
 	}
 
 	if (infoContainer.hasAttribute('hidden')) {
-		if (clickedIndex != -1) {
-			resetEls(elements);
-			resetEls(cards);
-			clickedIndex = -1;
-			clickedIndexType = '';
-		}
+		resetEls(elements);
+		resetEls(cards);
+		clickedIndex = -1;
+		clickedIndexType = '';
 	}
-})
+}
+
+html.addEventListener('click', () => {
+	clearAll()
+});
+html.addEventListener('keydown', (e) => {
+	if (e.key == "Escape") {
+		clearAll()
+	}
+});
 
 infoContainer.addEventListener('click', (e) => { e.stopImmediatePropagation() })
 
@@ -124,8 +131,8 @@ elements.forEach((element, index) => {
 	element.dataset.index = `${index + 1}`;
 
 	//Color
-	(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px var(--state-${element.dataset.state})`;
-	element.style.backgroundColor = `var(--type-${element.dataset.type})`;
+	(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px rgb(var(--state-${element.dataset.state}))`;
+	element.style.backgroundColor = `rgb(var(--type-${element.dataset.type}))`;
 	element.style.boxShadow = ` 0 0 1.5px 1.5px rgb(225, 225, 225)`;
 
 	//click effects
@@ -219,22 +226,28 @@ for (let i = 89; i < 104; i++) {
 	actinoid.style.gridColumn = `${(i - 88) + 2}`;
 }
 
-const back = document.querySelector('.back') as HTMLElement
+const fullContainer = document.querySelector('.full-container') as HTMLElement;
+const renderButton = document.querySelector('.render') as HTMLElement
+renderButton.addEventListener('click', (e) => {
+	if (infoContainer.hasAttribute('rendering')) {
+		e.stopPropagation();
 
-(document.querySelector('.render') as HTMLElement).addEventListener('click', () => {
-	(document.querySelector('.full-container') as HTMLElement).style.display = "none";
-	RenderAtom(parseInt(infoChildren[0].innerHTML) - 1);
-	back.style.display = 'block';
+		infoContainer.removeAttribute('rendering')
+
+		fullContainer.style.display = "flex";
+		simulation.innerHTML = '';
+
+		renderButton.innerHTML = 'Render';
+	} else {
+		infoContainer.setAttribute('rendering', '')
+		showInfo(parseInt(infoChildren[0].innerHTML) - 1)
+
+		fullContainer.style.display = "none";
+
+		renderButton.innerHTML = 'Return';
+		RenderAtom(parseInt(infoChildren[0].innerHTML) - 1);
+	}
 }, { capture: true });
-
-back.addEventListener('click', (e) => {
-	e.stopPropagation();
-	(document.querySelector('.full-container') as HTMLElement).style.display = "flex";
-	simulation.innerHTML = '';
-	back.style.display = '';
-});
-
-
 
 import * as THREE from 'three';
 
@@ -251,7 +264,7 @@ const RenderAtom = (index: number) => {
 
 	for (let i = 2; i < structure.length; i++) {
 		if (structure[i] > 0) {
-			shells.push({ radius: 4 + 1 * i, count: structure[i] })
+			shells.push({ radius: 4 + 0.75 * i, count: structure[i] })
 		}
 	}
 
@@ -262,9 +275,9 @@ const RenderAtom = (index: number) => {
 	simulation.appendChild(renderer.domElement);
 
 	// Lighting
-	scene.add(new THREE.AmbientLight(0x888888));
-	const light = new THREE.PointLight(0xffffff, 1);
-	light.position.set(10, 10, 10);
+	scene.add(new THREE.AmbientLight(0xffffff, 1));
+	const light = new THREE.PointLight(0xffffff, 100);
+	light.position.set(5, 5, 5);
 	scene.add(light);
 
 	const nucleonRadius = 0.5;
@@ -275,7 +288,6 @@ const RenderAtom = (index: number) => {
 	const protonMaterial = new THREE.MeshPhongMaterial({ color: 0xc80000 });
 	const neutronMaterial = new THREE.MeshPhongMaterial({ color: 0x0000c8 });
 
-	// Nucleon data
 	const nucleons: any[] = [];
 
 	function randomVector3(scale: number) {
@@ -297,7 +309,7 @@ const RenderAtom = (index: number) => {
 	}
 
 	// Force simulation
-	const iterations = Math.max(200, totalNucleons * 5);
+	const iterations = Math.max(200, totalNucleons * 2);
 	for (let step = 0; step < iterations; step++) {
 		for (let i = 0; i < nucleons.length; i++) {
 			let force = new THREE.Vector3();
@@ -306,7 +318,7 @@ const RenderAtom = (index: number) => {
 			const centerForce = nucleons[i].position.clone().multiplyScalar(-0.1);
 			force.add(centerForce);
 
-			const desiredSpacing = nucleonRadius * 2; // ideal center-to-center distance
+			const desiredSpacing = nucleonRadius * 2; // center-to-center distance
 
 			for (let j = 0; j < nucleons.length; j++) {
 				if (i === j) continue;
@@ -324,7 +336,7 @@ const RenderAtom = (index: number) => {
 
 			// Apply velocity
 			nucleons[i].velocity.clampLength(0, 0.2);
-			nucleons[i].velocity.add(force).multiplyScalar(0.9); // damping
+			nucleons[i].velocity.add(force).multiplyScalar(0.8); // damping
 		}
 
 		// Update positions
@@ -377,7 +389,7 @@ const RenderAtom = (index: number) => {
 		rings.push(ring);
 	}
 
-	camera.position.z = 50;
+	camera.position.z = 37 + 1.25 * rings.length;
 
 	const nucleonInitialPos: any[] = []
 	for (let i = 0; i < nucleons.length; i++) {
@@ -387,26 +399,26 @@ const RenderAtom = (index: number) => {
 	const speed = 1;
 	const maxZoom = 200;
 	let frame = 0;
+	
 	function animate() {
 		requestAnimationFrame(animate);
-
-		scene.rotation.y += 0.005;
 
 		frame++
 
 		if (frame <= maxZoom) {
-		camera.position.z -= 0.1 * (1 + (Math.abs(maxZoom / 2 - frame) / (maxZoom / 2)));
+			camera.position.z -= 0.1 * (1 + (Math.abs(maxZoom / 2 - frame) / (maxZoom / 2)));
+			scene.rotation.y += 0.015;
 		}
 
 		for (let i = 0; i < electrons.length; i++) {
 			for (let j = 0; j < electrons[i].length; j++) {
 				electrons[i][j].rotation.y += electronSpeed * speed;
-				electrons[i][j].rotation.x += 0.004 * (i + 1) * speed;
+				electrons[i][j].rotation.x += 0.005 * (i + 1) * speed;
 			}
 		}
 
 		for (let i = 0; i < rings.length; i++) {
-			rings[i].rotation.x += 0.004 * (i + 1) * speed;
+			rings[i].rotation.x += 0.005 * (i + 1) * speed;
 		}
 
 		const shift = (0.5 - Math.random()) / 5
@@ -415,7 +427,7 @@ const RenderAtom = (index: number) => {
 			if (nucleon.position.x == nucleonInitialPos[i].x) {
 				nucleon.position.x += shift * speed;
 				nucleon.position.z += shift / 2 * speed;
-				nucleon.position.y += shift / 4 * speed;
+				nucleon.position.y += shift / 3 * speed;
 			} else if (frame % 5 == 0) {
 				nucleon.position.x = nucleonInitialPos[i].x;
 				nucleon.position.y = nucleonInitialPos[i].y;

@@ -6,28 +6,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel='icon' href='/PeriodicTable/favicon.ico' type='image/x-icon' />
 	<title>Periodic Table</title>
-  <script type="module" crossorigin src="assets/index-yR8PhiU1.js"></script>
-  <link rel="stylesheet" crossorigin href="assets/index-C8g9Pw59.css">
+  <script type="module" crossorigin src="assets/index-CQIBUF4t.js"></script>
+  <link rel="stylesheet" crossorigin href="assets/index-DNFNr1gh.css">
 </head>
 
 <body>
 	<button class="back">Back</button>
 	<div class="simulation"></div>
-
+	<div class="info-container" hidden>
+		<div class="info">
+			<p class="atomic-number"></p>
+			<p class="symbol"></p>
+			<p class="name"></p>
+			<p class="atomic-weight"></p>
+		</div>
+		<p class="state"></p>
+		<p class="type"></p>
+		<button class="render">Render</button>
+	</div>
 	<div class="full-container">
 		<div class="main-content">
-			<div class="info-container" hidden>
-				<div class="info">
-					<p class="atomic-number"></p>
-					<p class="symbol"></p>
-					<p class="name"></p>
-					<p class="atomic-weight"></p>
-				</div>
-				<p class="state"></p>
-				<p class="type"></p>
-				<button class="render">Render</button>
-			</div>
-
 			<div class="table">
 				<div class="element" data-state="gas" data-type="non-metal" data-weight="1.008" data-name="Hydrogen"
 					data-structure="1,0,1,0,0,0">
@@ -309,7 +307,7 @@
 					<p>56</p>
 					<p>Ba</p>
 				</div>
-				<div class="card lanthanoids">
+				<div class="card lanthanoids" data-type="lanthanoid">
 					<p>57-71</p>
 				</div>
 				<div class="element" data-state="solid" data-type="lanthanoid" data-weight="138.90547"
@@ -472,7 +470,7 @@
 					<p>88</p>
 					<p>Ra</p>
 				</div>
-				<div class="card actinoids">
+				<div class="card actinoids" data-type="actinoid">
 					<p>89-103</p>
 				</div>
 				<div class="element" data-state="solid" data-type="actinoid" data-weight="227" data-name="Actinium"
@@ -626,37 +624,39 @@
 					<p>Og</p>
 				</div>
 			</div>
+
+			<div class="indicators">
+				<p>State of matter (color of name):</p>
+
+				<div>
+					<span class="state-indicator" data-name="solid">Solid</span>
+					<span class="state-indicator" data-name="liquid">Liquid</span>
+					<span class="state-indicator" data-name="gas">Gas</span>
+					<span class="state-indicator" data-name="unknown"> Unknown</span>
+				</div>
+
+				<p>Subcategory (color of background):</p>
+
+				<div>
+					<span class="type-indicator" data-name="alkaline-metal">Alkaline
+						Metal</span>
+					<span class="type-indicator" data-name="alkaline-earth-metal">Alkaline
+						Earth Metal</span>
+					<span class="type-indicator" data-name="transition-metal">Transition
+						Metal</span>
+					<span class="type-indicator" data-name="post-transition-metal">Post-Transition Metal</span>
+					<span class="type-indicator" data-name="metalloid">Metalloid</span>
+					<span class="type-indicator" data-name="non-metal">Non-Metal</span>
+					<span class="type-indicator" data-name="halogen">Halogen</span>
+					<span class="type-indicator" data-name="noble-gas">Noble Gas</span>
+					<span class="type-indicator" data-name="lanthanoid">Lanthanoid</span>
+					<span class="type-indicator" data-name="actinoid">Actinoid</span>
+
+				</div>
+			</div>
 		</div>
 
-		<div class="indicators">
-			<p>State of matter (color of name):</p>
 
-			<div>
-				<span class="state-indicator" data-name="solid">Solid</span>
-				<span class="state-indicator" data-name="liquid">Liquid</span>
-				<span class="state-indicator" data-name="gas">Gas</span>
-				<span class="state-indicator" data-name="unknown"> Unknown</span>
-			</div>
-
-			<p>Subcategory (color of background):</p>
-
-			<div>
-				<span class="type-indicator" data-name="alkaline-metal">Alkaline
-					Metal</span>
-				<span class="type-indicator" data-name="alkaline-earth-metal">Alkaline
-					Earth Metal</span>
-				<span class="type-indicator" data-name="metalloid">Metalloid</span>
-				<span class="type-indicator" data-name="noble-gas">Noble Gas</span>
-				<span class="type-indicator" data-name="lanthanoid">Lanthanoid</span>
-				<span class="type-indicator" data-name="actinoid">Actinoid</span>
-				<span class="type-indicator" data-name="non-metal">Non-Metal</span>
-				<span class="type-indicator" data-name="unknown">Unknown</span>
-				<span class="type-indicator" data-name="transition-metal">Transition
-					Metal</span>
-				<span class="type-indicator" data-name="post-transition-metal">Post-Transition Metal</span>
-				<span class="type-indicator" data-name="halogen">Halogen</span>
-			</div>
-		</div>
 	</div>
 </body>
 

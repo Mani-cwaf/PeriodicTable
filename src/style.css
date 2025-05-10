@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Rubik:wght@500;800&display=swap');
 
 :root {
-	--state-gas: rgb(101, 0, 0);
-	--state-liquid: rgb(0, 65, 115);
-	--state-solid: rgb(0, 0, 0);
-	--state-unknown: rgb(120, 120, 120);
+	--state-gas: 101, 0, 0;
+	--state-liquid: 0, 65, 115;
+	--state-solid: 0, 0, 0;
+	--state-unknown: 120, 120, 120;
 
-	--type-alkaline-metal: rgb(60, 0, 0);
-	--type-lanthanoid: rgb(0, 74, 74);
-	--type-transition-metal: rgb(0, 36, 71);
-	--type-alkaline-earth-metal: rgb(15, 15, 60);
-	--type-actinoid: rgb(21, 82, 62);
-	--type-post-transition-metal: rgb(0, 69, 0);
-	--type-metalloid: rgb(39, 53, 0);
-	--type-non-metal: rgb(142, 170, 2);
-	--type-halogen: rgb(122, 170, 2);
-	--type-noble-gas: rgb(170, 159, 2);
-	--type-unknown: rgb(120, 120, 120);
+	--type-alkaline-metal: 60, 0, 0;
+	--type-lanthanoid: 0, 74, 74;
+	--type-transition-metal: 0, 36, 71;
+	--type-alkaline-earth-metal: 15, 15, 60;
+	--type-actinoid: 21, 82, 62;
+	--type-post-transition-metal: 0, 69, 0;
+	--type-metalloid: 39, 53, 0;
+	--type-non-metal: 122, 170, 2;
+	--type-halogen: 0, 155, 83;
+	--type-noble-gas: 170, 159, 2;
+	--type-unknown: 120, 120, 120;
 
 	--background: rgb(5, 5, 5);
 	--scale: 15px;
@@ -30,6 +30,8 @@ body {
 	background-color: var(--background);
 	overflow-x: hidden;
 	overflow-y: auto;
+	margin: 0;
+	padding: 0;
 	color: white;
 	z-index: 2;
 }
@@ -62,6 +64,8 @@ body::-webkit-scrollbar {
 }
 
 .table {
+	position: relative;
+	top: 2vh;
 	width: 85vw;
 	height: 85vh;
 	display: grid;
@@ -126,13 +130,13 @@ body::-webkit-scrollbar {
 }
 
 .card.lanthanoids {
-	background-color: var(--type-lanthanoid);
-	box-shadow: 0 0 2px 2px var(--type-lanthanoid);
+	background-color: rgb(var(--type-lanthanoid));
+	box-shadow: 0 0 2px 2px rgb(var(--type-lanthanoid));
 }
 
 .card.actinoids {
-	background-color: var(--type-actinoid);
-	box-shadow: 0 0 2px 2px var(--type-actinoid);
+	background-color: rgb(var(--type-actinoid));
+	box-shadow: 0 0 2px 2px rgb(var(--type-actinoid));
 }
 
 .info-container {
@@ -143,15 +147,27 @@ body::-webkit-scrollbar {
 	width: 12rem;
 	height: fit-content;
 	padding: calc(1 * var(--scale));
+	transition: transform 0.5s ease-out, left 0.5s ease-out, top 0.5s ease-out;
 }
 
 .info-container:not(.info-container[hidden]) {
 	pointer-events: all;
 	z-index: 3;
+
+	.info {
+		z-index: 3;
+	}
 }
 
-.info-container:not(.info-container[hidden]) .info {
-	z-index: 3;
+.info-container[rendering] {
+	left: 1rem;
+	top: 25%;
+}
+
+.info-container:not(.info-container[rendering]) {
+	left: 50%;
+	transform: translate(-50%);
+	top: 25%;
 }
 
 .info-container * {
@@ -248,34 +264,35 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 }
 
 .indicators {
-	position: relative;
+	position: absolute;
+	left: 0;
+	top: 0;
 	align-self: center;
 	width: fit-content;
-	background-color: var(--background);
-	padding: calc(2 * var(--scale));
-	border-radius: calc(1 * var(--scale));
-	border: 5px solid rgb(15, 15, 15);
-	box-shadow: 0 0 calc(0.5 * var(--scale)) calc(0.5 * var(--scale)) black;
-	margin-top: 5rem;
-	margin-bottom: 2rem;
+	padding: calc(1 * var(--scale));
+	margin-left: 17.25vw;
 	z-index: 1;
 }
 
-.indicators>p {
+.indicators p {
 	margin: 0;
-	margin-bottom: calc(0.5 * var(--scale));
-	font-size: calc(2 * var(--scale));
+	margin-top: calc(0.75 * var(--scale));
+	margin-left: calc(1 * var(--scale));
+	font-size: calc(1 * var(--scale));
 	font-weight: 800;
+	pointer-events: none;
+	user-select: none;
 }
 
 .indicators span {
 	-webkit-user-select: none;
 	user-select: none;
 	display: inline-block;
-	margin: calc(1 * var(--scale));
+	margin: calc(0.4 * var(--scale));
+	margin-left: calc(1 * var(--scale));
 	padding: calc(0.25 * var(--scale));
 	border-radius: calc(0.25 * var(--scale));
-	font-size: 2vw;
+	font-size: 0.8vw;
 	font-weight: 800;
 	color: rgb(225, 225, 225);
 }
@@ -290,12 +307,24 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 }
 
 .simulation {
-	pointer-events: none;
-	z-index: -1;
+	z-index: 1;
 }
 
 @media (max-height: 640px) {
 	:root {
 		--scale: 10px
+	}
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+	html {
+		transform: rotate(-90deg);
+		transform-origin: left top;
+		width: 100vh;
+		height: 100vw;
+		overflow-x: hidden;
+		position: absolute;
+		top: 100%;
+		left: 0;
 	}
 }
