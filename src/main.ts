@@ -11,6 +11,13 @@ const indicators = [...document.querySelectorAll('.indicators span')] as HTMLEle
 
 const simulation = document.querySelector('.simulation') as HTMLElement
 
+type OrientationLockType = "any" | "landscape" | "natural" | "portrait" | OrientationType
+interface ScreenOrientation extends EventTarget {
+  lock(orientation: OrientationLockType): Promise<void>;
+}
+
+(screen.orientation as unknown as ScreenOrientation).lock("landscape");
+
 indicators.forEach((indicator) => {
 	// add box shadow to indicators, based on state for the first 4, and category for the rest 
 	if (indicator.classList.contains('state-indicator')) {
