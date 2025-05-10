@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Rubik:wght@500;800&display=swap');
 
 :root {
-	--state-gas: 101, 0, 0;
+	--state-gas: 70, 0, 12;
 	--state-liquid: 0, 65, 115;
-	--state-solid: 0, 0, 0;
+	--state-solid: 225, 225, 225;
 	--state-unknown: 120, 120, 120;
 
 	--type-alkaline-metal: 60, 0, 0;
@@ -147,6 +147,7 @@ body::-webkit-scrollbar {
 	width: 12rem;
 	height: fit-content;
 	padding: calc(1 * var(--scale));
+	border-radius: 0.5rem;
 	transition: transform 0.5s ease-out, left 0.5s ease-out, top 0.5s ease-out;
 }
 
@@ -160,7 +161,7 @@ body::-webkit-scrollbar {
 }
 
 .info-container[rendering] {
-	left: 1rem;
+	left: 2rem;
 	top: 25%;
 }
 
@@ -178,8 +179,8 @@ body::-webkit-scrollbar {
 
 .info-container>p {
 	margin-top: calc(1 * var(--scale));
-	font-size: calc(1 * var(--scale));
-	font-weight: 700;
+	font-size: calc(1.125 * var(--scale));
+	font-weight: 600;
 
 }
 
@@ -226,12 +227,6 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	opacity: 0.5;
 }
 
-.back {
-	position: absolute;
-	margin: 2rem;
-}
-
-.back,
 .render {
 	display: none;
 
@@ -304,10 +299,6 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 .indicators div {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-}
-
-.simulation {
-	z-index: 1;
 }
 
 @media (max-height: 640px) {

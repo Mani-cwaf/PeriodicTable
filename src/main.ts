@@ -45,11 +45,12 @@ const showInfo = (elementIndex: any) => {
 	infoChildren[1].innerHTML = element.children[1].innerHTML;
 	infoChildren[2].innerHTML = element.dataset.name as string;
 	infoChildren[3].innerHTML = element.dataset.weight as string;
-	let state = document.querySelector(`.indicators span[data-name='${element.dataset.state}']`) as HTMLElement
-	let type = document.querySelector(`.indicators span[data-name='${element.dataset.type}']`) as HTMLElement
-	extraInfo[0].innerHTML = `State: ${state.innerHTML}`
-	extraInfo[1].innerHTML = `Category: ${type.innerHTML}`
-	extraInfo[2].style.display = `block`
+	let state = document.querySelector(`.indicators span[data-name='${element.dataset.state}']`) as HTMLElement;
+	let type = document.querySelector(`.indicators span[data-name='${element.dataset.type}']`) as HTMLElement;
+	extraInfo[0].innerHTML = `State: <span> ${state.innerHTML} </span>`;
+	(extraInfo[0].querySelector('span') as HTMLElement).style.color = `rgb(var(--state-${element.dataset.state}))`;
+	extraInfo[1].innerHTML = `Category: ${type.innerHTML}`;
+	extraInfo[2].style.display = `block`;
 }
 
 const hideInfo = () => {
@@ -84,17 +85,25 @@ const resetEls = (array: HTMLElement[]) => {
 const highlightCategory = (currentType: string) => {
 	//Highlight all elements
 	resetEls(elements);
+	resetEls(cards);
 	//If an element is not of the same category as the one selected, unhighlight it
 	elements.forEach(e => {
-		if (e.dataset.type != currentType) {
+		if (currentType != e.dataset.type) {
 			e.style.opacity = '0.4';
 		}
 	})
 	cards.forEach(e => {
-		if (e.dataset.type != currentType) {
+		if (currentType != e.dataset.type) {
 			e.style.opacity = '0.4';
 		}
 	})
+	indicators.forEach(indicator => {
+		if (currentType == indicator.dataset.name) {
+			indicator.style.filter = 'brightness(2)';
+		} else {
+			indicator.style.filter = 'brightness(0.5)';
+		}
+	});
 }
 
 infoContainer.addEventListener('click', (e) => { e.stopPropagation() })
@@ -106,6 +115,7 @@ const clearAll = () => {
 
 	if (infoContainer.hasAttribute('hidden')) {
 		resetEls(elements);
+		resetEls(indicators);
 		resetEls(cards);
 		clickedIndex = -1;
 		clickedIndexType = '';
@@ -131,7 +141,11 @@ elements.forEach((element, index) => {
 	element.dataset.index = `${index + 1}`;
 
 	//Color
-	(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px rgb(var(--state-${element.dataset.state}))`;
+	if (element.dataset.state != "solid") {
+		(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px rgb(var(--state-${element.dataset.state}))`;
+	} else {
+		(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px black`;
+	}
 	element.style.backgroundColor = `rgb(var(--type-${element.dataset.type}))`;
 	element.style.boxShadow = ` 0 0 1.5px 1.5px rgb(225, 225, 225)`;
 
@@ -172,18 +186,14 @@ elements.forEach((element, index) => {
 		clickedIndexType = currentIndexType;
 		clickedIndex = index;
 
-		// unhighlights lanthanoid and actinoid cards
-		cards.forEach(e => {
-			e.style.opacity = '0.5';
-		})
-
 		//Opens info panel
 		showInfo(clickedIndex);
 	}, { capture: true });
 
 	element.addEventListener('mouseenter', () => {
-		// enlarge hovered element
+		// Enlarge hovered element
 		element.style.transform = 'scale(1.25)';
+
 		// If no element is selected, highlight hovered element
 		if (clickedIndexType == '') {
 			elements.forEach(e => {
@@ -238,6 +248,10 @@ renderButton.addEventListener('click', (e) => {
 		simulation.innerHTML = '';
 
 		renderButton.innerHTML = 'Render';
+
+		setTimeout(() => {
+			clearAll()
+		}, 450);
 	} else {
 		infoContainer.setAttribute('rendering', '')
 		showInfo(parseInt(infoChildren[0].innerHTML) - 1)
@@ -399,7 +413,7 @@ const RenderAtom = (index: number) => {
 	const speed = 1;
 	const maxZoom = 200;
 	let frame = 0;
-	
+
 	function animate() {
 		requestAnimationFrame(animate);
 
