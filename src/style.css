@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Rubik:wght@500;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;900&display=swap');
 
 :root {
 	--state-gas: 70, 0, 12;
@@ -11,14 +11,14 @@
 	--type-transition-metal: 0, 36, 71;
 	--type-alkaline-earth-metal: 15, 15, 60;
 	--type-actinoid: 21, 82, 62;
-	--type-post-transition-metal: 0, 69, 0;
-	--type-metalloid: 39, 53, 0;
-	--type-non-metal: 122, 170, 2;
-	--type-halogen: 0, 155, 83;
+	--type-post-transition-metal: 86, 11, 90;
+	--type-metalloid: 65, 19, 150;
+	--type-non-metal: 1, 136, 73;
+	--type-halogen: 97, 133, 0;
 	--type-noble-gas: 170, 159, 2;
 	--type-unknown: 120, 120, 120;
 
-	--background: rgb(5, 5, 5);
+	--background: rgb(0, 0, 7);
 	--scale: 15px;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 body * {
-	font-family: 'Rubik';
+	font-family: 'Rubik', sans-serif;
 }
 
 body::-webkit-scrollbar {
@@ -65,21 +65,23 @@ body::-webkit-scrollbar {
 
 .table {
 	position: relative;
-	top: 2vh;
+	top: 1vh;
 	left: 0;
-	width: 85vw;
-	height: 85vh;
+	height: 94vh;
 	display: grid;
 	grid-auto-flow: row;
+	grid-template-columns: repeat(18, 1fr);
+	grid-template-rows: repeat(9, 1fr);
 }
 
 .element,
 .card {
+	will-change: transform, opacity;
 	text-align: center;
 	aspect-ratio: 1 / 1;
-	width: 85%;
-	font-size: clamp(0.5vw, calc(2 * var(--scale)), 2vw);
-	font-weight: 700;
+	width: 87%;
+	font-size: clamp(1.5vw, calc(2 * var(--scale)), 3vw);
+	font-weight: 600;
 	color: rgb(225, 225, 225);
 	margin-top: calc(0.5 * var(--scale));
 	border-radius: calc(0.25 * var(--scale));
@@ -93,9 +95,7 @@ body::-webkit-scrollbar {
 .element>p:nth-child(1) {
 	position: absolute;
 	margin-left: calc(0.25 * var(--scale));
-	;
 	font-size: calc(0.75 * var(--scale));
-	;
 	margin-bottom: 0;
 	margin-top: calc(0.25 * var(--scale));
 }
@@ -148,11 +148,9 @@ body::-webkit-scrollbar {
 	flex-direction: column;
 	align-self: center;
 	width: calc(12 * var(--scale));
-	;
 	height: fit-content;
 	padding: calc(1 * var(--scale));
 	border-radius: calc(0.5 * var(--scale));
-	;
 	transition: transform 0.5s ease-out, left 0.5s ease-out, top 0.5s ease-out;
 }
 
@@ -166,7 +164,7 @@ body::-webkit-scrollbar {
 }
 
 .info-container[rendering] {
-	left: calc(2 * var(--scale));;
+	left: calc(2 * var(--scale));
 	top: 25%;
 }
 
@@ -209,7 +207,7 @@ body::-webkit-scrollbar {
 .symbol {
 	text-align: center;
 	font-size: calc(6 * var(--scale));
-	font-weight: 1000;
+	font-weight: 900;
 }
 
 .name {
@@ -243,17 +241,19 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	font-size: calc(2 * var(--scale));;
 	border-radius: calc(0.5 * var(--scale));
 	pointer-events: all !important;
+	cursor: pointer;
 	z-index: 4;
 }
 
 .indicators {
-	position: absolute;
-	left: 0;
-	top: 0;
+	display: flex;
+	flex-direction: column;
+	grid-column: 3 / 13;
+	grid-row: 1 / 4;
+	padding: 0.5rem;
+	transform: translateX(-0.5rem);
 	align-self: center;
-	width: fit-content;
-	padding: calc(1 * var(--scale));
-	margin-left: 17.25vw;
+	justify-content: center;
 	z-index: 1;
 }
 
@@ -278,6 +278,7 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	font-size: clamp(calc(0.2 * var(--scale)), 0.8vw, calc(1 * var(--scale)));
 	font-weight: 800;
 	color: rgb(225, 225, 225);
+	transition: all 0.1s ease-in-out;
 }
 
 .indicators span.type-indicator {

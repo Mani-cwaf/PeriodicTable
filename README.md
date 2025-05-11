@@ -1,2 +1,2 @@
 # PeriodicTable
- A friendly, fast periodic table website
+An interactive periodic table website.
