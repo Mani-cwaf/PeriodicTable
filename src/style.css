@@ -6,19 +6,19 @@
 	--state-solid: 225, 225, 225;
 	--state-unknown: 120, 120, 120;
 
-	--type-alkaline-metal: 60, 0, 0;
-	--type-lanthanoid: 0, 74, 74;
-	--type-transition-metal: 0, 36, 71;
-	--type-alkaline-earth-metal: 15, 15, 60;
-	--type-actinoid: 21, 82, 62;
-	--type-post-transition-metal: 0, 69, 0;
-	--type-metalloid: 39, 53, 0;
-	--type-non-metal: 122, 170, 2;
-	--type-halogen: 0, 155, 83;
-	--type-noble-gas: 170, 159, 2;
-	--type-unknown: 120, 120, 120;
+    --type-alkaline-metal: 188, 14, 1;
+    --type-lanthanoid: 17, 247, 193;
+    --type-transition-metal: 8, 110, 252;
+    --type-alkaline-earth-metal: 252, 137, 35;
+    --type-actinoid: 121, 250, 77;
+    --type-post-transition-metal: 240, 29, 148;
+    --type-metalloid:  151, 96, 252;
+    --type-non-metal: 37, 202, 3;
+    --type-halogen: 0, 140, 21;
+    --type-noble-gas: 247, 197, 17;
+    --type-unknown: 45, 41, 56;
 
-	--background: rgb(5, 5, 5);
+	--background: rgb(0, 6, 18);
 	--scale: 15px;
 }
 
@@ -80,13 +80,12 @@ body::-webkit-scrollbar {
 	width: 85%;
 	font-size: clamp(0.5vw, calc(2 * var(--scale)), 2vw);
 	font-weight: 700;
-	color: rgb(225, 225, 225);
+	border-radius:calc(0.25 * var(--scale));;
+	filter: brightness(6%);
 	margin-top: calc(0.5 * var(--scale));
-	border-radius: calc(0.25 * var(--scale));
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
-	z-index: 1;
 	transition: all 0.15s ease-in-out;
 }
 
@@ -98,11 +97,14 @@ body::-webkit-scrollbar {
 	;
 	margin-bottom: 0;
 	margin-top: calc(0.25 * var(--scale));
+	color: white;
 }
 
 .element>p:nth-child(2) {
 	margin-bottom: 0;
-	margin-top: calc(1 * var(--scale));
+	margin-top: calc(0.85 * var(--scale));
+	font-size:  2rem;
+	color: white;
 }
 
 .element-2 {
@@ -133,13 +135,13 @@ body::-webkit-scrollbar {
 }
 
 .card.lanthanoids {
-	background-color: rgb(var(--type-lanthanoid));
-	box-shadow: 0 0 2px 2px rgb(var(--type-lanthanoid));
+	background-color: linear-gradient(90deg,rgba(var(--type-lanthanoid), 0.50) 0%, rgba(var(--type-lanthanoid), 1) 100%);
+	box-shadow: rgb(255, 255, 255) 1px 1px 0px 0px;
 }
 
 .card.actinoids {
-	background-color: rgb(var(--type-actinoid));
-	box-shadow: 0 0 2px 2px rgb(var(--type-actinoid));
+	background-color: linear-gradient(90deg,rgba(var(--type-actinoid, 0.50) 0%, rgba(var(--type-actinoid), 1) 100%));
+	box-shadow: rgb(255, 255, 255) 1px 1px 0px 0px;
 }
 
 .info-container {

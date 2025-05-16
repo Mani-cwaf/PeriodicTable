@@ -1,4 +1,5 @@
 import './style.css'
+import * as THREE from 'three';
 
 const elements = [...document.querySelectorAll('.element')] as HTMLElement[];
 const cards = [...document.querySelectorAll('.card')] as HTMLElement[];
@@ -13,7 +14,7 @@ const simulation = document.querySelector('.simulation') as HTMLElement
 
 type OrientationLockType = "any" | "landscape" | "natural" | "portrait" | OrientationType
 interface ScreenOrientation extends EventTarget {
-  lock(orientation: OrientationLockType): Promise<void>;
+	lock(orientation: OrientationLockType): Promise<void>;
 }
 
 (screen.orientation as unknown as ScreenOrientation).lock("landscape");
@@ -21,11 +22,11 @@ interface ScreenOrientation extends EventTarget {
 indicators.forEach((indicator) => {
 	// add box shadow to indicators, based on state for the first 4, and category for the rest 
 	if (indicator.classList.contains('state-indicator')) {
-		indicator.style.backgroundColor = `rgba(var(--state-${indicator.dataset.name}), 0.25)`
-		indicator.style.boxShadow = `0 0 calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--state-${indicator.dataset.name}))`;
+		indicator.style.background = `linear-gradient(90deg,rgba(var(--state-${indicator.dataset.name}), 0.5) 0%, rgba(var(--state-${indicator.dataset.name}), 0.35) 100%)`
+		indicator.style.boxShadow = `0.5px 0.5px calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--state-${indicator.dataset.name}))`;
 	} else {
-		indicator.style.backgroundColor = `rgba(var(--type-${indicator.dataset.name}), 0.25)`
-		indicator.style.boxShadow = `0 0 calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--type-${indicator.dataset.name}))`;
+		indicator.style.background = `linear-gradient(90deg,rgba(var(--type-${indicator.dataset.name}), 0.5) 0%, rgba(var(--type-${indicator.dataset.name}), 0.35) 100%)`
+		indicator.style.boxShadow = `0.5px 0.5px calc(0.25 * var(--scale)) calc(0.25 * var(--scale)) rgb(var(--type-${indicator.dataset.name}))`;
 		indicator.addEventListener('click', () => {
 			html.scroll(0, 0);
 			setTimeout(() => {
@@ -83,9 +84,9 @@ const hideInfo = () => {
 
 const resetEls = (array: HTMLElement[]) => {
 	array.forEach(e => {
-		e.style.opacity = '1';
-		e.style.transform = 'scale(1)';
 		e.style.filter = 'brightness(1)';
+		e.style.transform = 'scale(1)';
+		e.style.opacity = '1';
 	})
 }
 
@@ -96,17 +97,17 @@ const highlightCategory = (currentType: string) => {
 	//If an element is not of the same category as the one selected, unhighlight it
 	elements.forEach(e => {
 		if (currentType != e.dataset.type) {
-			e.style.opacity = '0.4';
+			e.style.opacity = '0.5';
 		}
 	})
 	cards.forEach(e => {
 		if (currentType != e.dataset.type) {
-			e.style.opacity = '0.4';
+			e.style.opacity = '0.5';
 		}
 	})
 	indicators.forEach(indicator => {
 		if (currentType == indicator.dataset.name) {
-			indicator.style.filter = 'brightness(2)';
+			indicator.style.filter = 'brightness(1.5)';
 		} else {
 			indicator.style.filter = 'brightness(0.5)';
 		}
@@ -125,7 +126,6 @@ const clearAll = () => {
 		resetEls(indicators);
 		resetEls(cards);
 		clickedIndex = -1;
-		clickedIndexType = '';
 	}
 }
 
@@ -141,20 +141,14 @@ html.addEventListener('keydown', (e) => {
 infoContainer.addEventListener('click', (e) => { e.stopImmediatePropagation() })
 
 let clickedIndex = -1;
-let clickedIndexType = '';
 elements.forEach((element, index) => {
-	let currentIndexType = element.dataset.type as string;
 	element.classList.add(`element-${index + 1}`);
 	element.dataset.index = `${index + 1}`;
 
 	//Color
-	if (element.dataset.state != "solid") {
-		(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px rgb(var(--state-${element.dataset.state}))`;
-	} else {
-		(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px black`;
-	}
-	element.style.backgroundColor = `rgb(var(--type-${element.dataset.type}))`;
-	element.style.boxShadow = ` 0 0 1.5px 1.5px rgb(225, 225, 225)`;
+	element.style.background = `linear-gradient(90deg,rgba(var(--type-${element.dataset.type}), 0.50) 0%, rgba(var(--type-${element.dataset.type}), 1) 100%)`;
+	element.style.boxShadow = ` 1px 1px 0px 0px rgba(255, 255, 255, 1)`;
+	element.style.filter = 'brightness(1)';
 
 	//click effects
 	element.addEventListener('click', (e) => {
@@ -168,29 +162,12 @@ elements.forEach((element, index) => {
 			resetEls(cards);
 		}
 
-		if (clickedIndexType == currentIndexType) {
-			clickedIndexType = '';
-			elements[clickedIndex].style.transform = 'scale(1)';
-			elements[clickedIndex].style.filter = 'brightness(1)';
-			//showInfo(clickedIndex);
-			clickedIndex = index;
+		let currentType = element.dataset.type as string;
+		highlightCategory(currentType);
 
-		} else {
-			//If the category of element being selected is not already selected by another element, change the category highlighted
+		element.style.transform = 'scale(1.2)';
+		element.style.filter = 'brightness(1.5)';
 
-			let currentType = element.dataset.type as string;
-			highlightCategory(currentType);
-
-			if (clickedIndex != -1) {
-				elements[clickedIndex].style.transform = 'scale(1)';
-				elements[clickedIndex].style.filter = 'brightness(1)';
-			}
-		}
-
-		element.style.transform = 'scale(1.25)';
-		element.style.filter = 'brightness(1.2)';
-
-		clickedIndexType = currentIndexType;
 		clickedIndex = index;
 
 		//Opens info panel
@@ -199,30 +176,15 @@ elements.forEach((element, index) => {
 
 	element.addEventListener('mouseenter', () => {
 		// Enlarge hovered element
-		element.style.transform = 'scale(1.25)';
-
-		// If no element is selected, highlight hovered element
-		if (clickedIndexType == '') {
-			elements.forEach(e => {
-				if (e.dataset.index == `${index + 1}`) {
-					e.style.filter = 'brightness(1.5)'
-				}
-			});
-		}
+		element.style.transform = 'scale(1.2)';
+		element.style.filter = 'brightness(1.5)';
 	});
 
 	element.addEventListener('mouseleave', () => {
-		// When element is no longer hovered, reset brightness
-		element.style.filter = 'brightness(1)';
-
-		// If any element is selected, keep it highlighted
-		if (clickedIndexType != '') {
-			elements[clickedIndex].style.filter = 'brightness(1.5)';
-		}
-
 		// Reset size of all elements except the selected one
 		if (clickedIndex != index) {
 			element.style.transform = 'scale(1)';
+			element.style.filter = 'brightness(1)';
 		}
 
 	});
@@ -269,8 +231,6 @@ renderButton.addEventListener('click', (e) => {
 		RenderAtom(parseInt(infoChildren[0].innerHTML) - 1);
 	}
 }, { capture: true });
-
-import * as THREE from 'three';
 
 const RenderAtom = (index: number) => {
 	const structure: any[] = []
