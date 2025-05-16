@@ -1,3 +1,4 @@
+import { randFloatSpread } from 'three/src/math/MathUtils.js';
 import './style.css'
 import * as THREE from 'three';
 
@@ -151,7 +152,7 @@ elements.forEach((element, index) => {
 	} else {
 		(element.children[1] as HTMLElement).style.webkitTextStroke = `1.5px black`;
 	}
-	element.style.background = `linear-gradient(90deg,rgba(var(--type-${element.dataset.type}), 0.75) 0%, rgba(var(--type-${element.dataset.type}), 1) 100%)`;
+	element.style.background = `linear-gradient(90deg,rgba(var(--type-${element.dataset.type}), 0.55) 0%, rgba(var(--type-${element.dataset.type}), 1) 100%)`;
 	element.style.boxShadow = ` 0.75px 0.75px 1.5px 1.5px rgba(255, 255, 255, 0.6)`;
 	element.style.filter = 'brightness(1)';
 
@@ -262,9 +263,12 @@ const RenderAtom = (index: number) => {
 
 	// Lighting
 	scene.add(new THREE.AmbientLight(0xffffff, 1));
-	const light = new THREE.PointLight(0xffffff, 100);
-	light.position.set(5, 5, 5);
+	const light = new THREE.PointLight(0xffffff, 200);
+	light.position.set(10, 5, 5);
 	scene.add(light);
+
+	scene.fog = new THREE.FogExp2(0x000008, 0.03);
+	renderer.setClearColor(0x000008);
 
 	const nucleonRadius = 0.5;
 	const totalNucleons = protonCount + neutronCount;
@@ -407,19 +411,20 @@ const RenderAtom = (index: number) => {
 			rings[i].rotation.x += 0.005 * (i + 1) * speed;
 		}
 
-		const shift = (0.5 - Math.random()) / 5
+		const shift = 0.005
 		for (let i = 0; i < nucleons.length; i++) {
 			const nucleon = nucleons[i].mesh;
-			if (nucleon.position.x == nucleonInitialPos[i].x) {
-				nucleon.position.x += shift * speed;
-				nucleon.position.z += shift / 2 * speed;
-				nucleon.position.y += shift / 3 * speed;
-			} else if (frame % 5 == 0) {
-				nucleon.position.x = nucleonInitialPos[i].x;
-				nucleon.position.y = nucleonInitialPos[i].y;
-				nucleon.position.z = nucleonInitialPos[i].z;
+			if ((frame + i * 10) % 50 > 24) {
+				nucleon.position.x += shift * speed * (nucleon.position.x > 0 ? 1 : -1);
+				nucleon.position.y += shift * speed * (nucleon.position.y > 0 ? 1 : -1);
+				nucleon.position.z += shift * speed * (nucleon.position.z > 0 ? 1 : -1);
+			} else {
+				nucleon.position.x -= shift * speed * (nucleon.position.x > 0 ? 1 : -1);
+				nucleon.position.y -= shift * speed * (nucleon.position.y > 0 ? 1 : -1);
+				nucleon.position.z -= shift * speed * (nucleon.position.z > 0 ? 1 : -1);
 			}
 		}
+
 
 		renderer.render(scene, camera);
 	}

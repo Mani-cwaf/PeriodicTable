@@ -6,19 +6,19 @@
 	--state-solid: 225, 225, 225;
 	--state-unknown: 120, 120, 120;
 
-	--type-alkaline-metal: 60, 0, 0;
-	--type-lanthanoid: 0, 74, 74;
-	--type-transition-metal: 0, 36, 71;
-	--type-alkaline-earth-metal: 15, 15, 60;
-	--type-actinoid: 21, 82, 62;
-	--type-post-transition-metal: 86, 11, 90;
-	--type-metalloid: 65, 19, 150;
-	--type-non-metal: 1, 136, 73;
-	--type-halogen: 97, 133, 0;
-	--type-noble-gas: 170, 159, 2;
-	--type-unknown: 120, 120, 120;
+	--type-alkaline-metal: 188, 14, 1;
+    --type-lanthanoid: 24, 184, 146;
+    --type-transition-metal: 8, 110, 252;
+    --type-alkaline-earth-metal: 252, 137, 35;
+    --type-actinoid: 77, 166, 47;
+    --type-post-transition-metal: 240, 29, 148;
+    --type-metalloid:  151, 96, 252;
+    --type-non-metal: 37, 202, 3;
+    --type-halogen: 0, 140, 21;
+    --type-noble-gas: 247, 197, 17;
+    --type-unknown: 45, 41, 56;
 
-	--background: rgb(0, 0, 7);
+	--background: rgb(0, 0, 8);
 	--scale: 15px;
 }
 
@@ -27,7 +27,7 @@ html {
 }
 
 body {
-	background-color: var(--background);
+	background: radial-gradient(circle at center, rgb(0, 5, 20), var(--background));
 	overflow-x: hidden;
 	overflow-y: auto;
 	margin: 0;
