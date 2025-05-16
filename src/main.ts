@@ -1,6 +1,7 @@
-import { randFloatSpread } from 'three/src/math/MathUtils.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import './style.css'
 import * as THREE from 'three';
+import { seededRandom } from 'three/src/math/MathUtils.js';
 
 const elements = [...document.querySelectorAll('.element')] as HTMLElement[];
 const cards = [...document.querySelectorAll('.card')] as HTMLElement[];
@@ -261,13 +262,19 @@ const RenderAtom = (index: number) => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	simulation.appendChild(renderer.domElement);
 
+	const controls = new OrbitControls(camera, renderer.domElement);
+	controls.rotateSpeed = 0.5
+	controls.enablePan = false
+	controls.dampingFactor = 0.1
+	controls.enableDamping = true
+
 	// Lighting
 	scene.add(new THREE.AmbientLight(0xffffff, 1));
 	const light = new THREE.PointLight(0xffffff, 200);
 	light.position.set(10, 5, 5);
 	scene.add(light);
 
-	scene.fog = new THREE.FogExp2(0x000008, 0.03);
+	scene.fog = new THREE.FogExp2(0x000008, 0.05);
 	renderer.setClearColor(0x000008);
 
 	const nucleonRadius = 0.5;
@@ -343,13 +350,11 @@ const RenderAtom = (index: number) => {
 
 	// --- Electron Orbit Section ---
 	const electronMaterial = new THREE.MeshPhongMaterial({ color: 0xffff00 });
-	const electronRadius = 0.25;
+	const electronRadius = 0.225;
 	const electronGeometry = new THREE.SphereGeometry(electronRadius, 16, 16);
 
 	const ringMaterial = new THREE.MeshBasicMaterial({
-		color: 0xc8c800,
-		wireframe: true,
-		opacity: 0.5,
+		color: 0xffff00,
 		transparent: true,
 	});
 
@@ -380,15 +385,22 @@ const RenderAtom = (index: number) => {
 	}
 
 	camera.position.z = 37 + 1.25 * rings.length;
-
-	const nucleonInitialPos: any[] = []
-	for (let i = 0; i < nucleons.length; i++) {
-		nucleonInitialPos.push(nucleons[i].mesh.position.clone());
-	}
+	scene.rotation.x += 0.25;
+	controls.update();
 
 	const speed = 1;
 	const maxZoom = 200;
 	let frame = 0;
+
+	for (let i = 0; i < electrons.length; i++) {
+		for (let j = 0; j < electrons[i].length; j++) {
+			electrons[i][j].rotation.x += 1 * (Math.ceil((i + 1) / 2)) * speed;
+		}
+	}
+
+	for (let i = 0; i < rings.length; i++) {
+		rings[i].rotation.x += 1 * (Math.ceil((i + 1) / 2)) * speed;
+	}
 
 	function animate() {
 		requestAnimationFrame(animate);
@@ -397,22 +409,17 @@ const RenderAtom = (index: number) => {
 
 		if (frame <= maxZoom) {
 			camera.position.z -= 0.1 * (1 + (Math.abs(maxZoom / 2 - frame) / (maxZoom / 2)));
-			scene.rotation.y += 0.015;
+			scene.rotation.y += 0.0079;
 		}
 
 		for (let i = 0; i < electrons.length; i++) {
 			for (let j = 0; j < electrons[i].length; j++) {
-				electrons[i][j].rotation.y += electronSpeed * speed;
-				electrons[i][j].rotation.x += 0.005 * (i + 1) * speed;
+				electrons[i][j].rotation.y += electronSpeed * speed * (Math.sqrt(i + 1));
 			}
 		}
 
-		for (let i = 0; i < rings.length; i++) {
-			rings[i].rotation.x += 0.005 * (i + 1) * speed;
-		}
-
-		const shift = 0.005
 		for (let i = 0; i < nucleons.length; i++) {
+			const shift = 0.0025 * (1 + seededRandom(i))
 			const nucleon = nucleons[i].mesh;
 			if ((frame + i * 10) % 50 > 24) {
 				nucleon.position.x += shift * speed * (nucleon.position.x > 0 ? 1 : -1);
@@ -425,7 +432,7 @@ const RenderAtom = (index: number) => {
 			}
 		}
 
-
+		controls.update();
 		renderer.render(scene, camera);
 	}
 

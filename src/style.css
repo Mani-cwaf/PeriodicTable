@@ -222,7 +222,7 @@ body::-webkit-scrollbar {
 	text-align: center;
 }
 
-html:not(:has(.info-container[hidden])) *:not(.info-container) {
+html:not(:has(.info-container[hidden])) .table {
 	pointer-events: none;
 }
 
@@ -288,6 +288,10 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 .indicators div {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+}
+
+.simulation {
+	position: relative;
 }
 
 @media (max-height: 640px) or (min-aspect-ratio: 2.2/1) {
