@@ -6,16 +6,16 @@
 	--state-solid: 225, 225, 225;
 	--state-unknown: 120, 120, 120;
 
-	--type-alkaline-metal: 188, 14, 1;
-    --type-lanthanoid: 24, 184, 146;
-    --type-transition-metal: 8, 110, 252;
-    --type-alkaline-earth-metal: 252, 137, 35;
-    --type-actinoid: 77, 166, 47;
-    --type-post-transition-metal: 240, 29, 148;
-    --type-metalloid:  151, 96, 252;
-    --type-non-metal: 37, 202, 3;
-    --type-halogen: 0, 140, 21;
-    --type-noble-gas: 247, 197, 17;
+	--type-alkaline-metal: 159, 11, 0;
+    --type-lanthanoid: 20, 156, 124;
+    --type-transition-metal: 9, 98, 222;
+    --type-alkaline-earth-metal: 222, 119, 30;
+    --type-actinoid: 65, 141, 39;
+    --type-post-transition-metal: 209, 25, 129;
+    --type-metalloid:  130, 83, 215;
+    --type-non-metal: 30, 167, 3;
+    --type-halogen: 1, 104, 16;
+    --type-noble-gas: 208, 166, 15;
     --type-unknown: 45, 41, 56;
 
 	--background: rgb(0, 0, 8);
@@ -207,7 +207,7 @@ body::-webkit-scrollbar {
 .symbol {
 	text-align: center;
 	font-size: calc(6 * var(--scale));
-	font-weight: 900;
+	font-weight: 700;
 }
 
 .name {
@@ -278,7 +278,7 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 	font-size: clamp(calc(0.2 * var(--scale)), 0.8vw, calc(1 * var(--scale)));
 	font-weight: 800;
 	color: rgb(225, 225, 225);
-	transition: all 0.1s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .indicators span.type-indicator {
@@ -292,6 +292,29 @@ html:not(:has(.info-container[hidden])) .indicators-button {
 
 .simulation {
 	position: relative;
+}
+
+.github {
+	position: absolute;
+	left: 2rem;
+	bottom: 1.5rem;
+	scale: 2;
+	width: fit-content;
+	height: fit-content;
+}
+
+.github:hover {
+	scale: 2.2;
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+.github a:visited {
+	color: rgb(225, 225, 225);
+}
+
+.github a:link {
+	color: rgb(225, 225, 225);
 }
 
 @media (max-height: 640px) or (min-aspect-ratio: 2.2/1) {
